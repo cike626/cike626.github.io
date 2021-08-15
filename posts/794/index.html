@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、CUnit简介CUnit 是一个通过 C 语言编写的用于编写、管理和执行单元测试用例的C语言单元测试框架。它往往被编成库的形式（静态库或动态库）提供给用户测试代码进行使用，用户编写程序的时候直接链接此静态库就可以了。 它提供了一个简单的单元测试框架，并且为常用的数据类型提供了丰富的断言语句支持。 CUnit是平台无关的框架与各种用户接口的组合。核心框架为管理测试注册表，套件和测试用例提供了基本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cunit单元测试">
+<meta property="og:url" content="http://example.com/posts/794/index.html">
+<meta property="og:site_name" content="Cike">
+<meta property="og:description" content="1、CUnit简介CUnit 是一个通过 C 语言编写的用于编写、管理和执行单元测试用例的C语言单元测试框架。它往往被编成库的形式（静态库或动态库）提供给用户测试代码进行使用，用户编写程序的时候直接链接此静态库就可以了。 它提供了一个简单的单元测试框架，并且为常用的数据类型提供了丰富的断言语句支持。 CUnit是平台无关的框架与各种用户接口的组合。核心框架为管理测试注册表，套件和测试用例提供了基本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/posts/794/cunit_registry.jpg">
+<meta property="og:image" content="http://example.com/posts/794/cunit_install_doc.png">
+<meta property="og:image" content="http://example.com/posts/794/cunit%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://example.com/posts/794/cunit_install_share.png">
+<meta property="og:image" content="http://example.com/posts/794/cunit_basic.png">
+<meta property="og:image" content="http://example.com/posts/794/cunit_automated_result.png">
+<meta property="og:image" content="http://example.com/posts/794/cunit_automated_listing.png">
+<meta property="article:published_time" content="2021-08-15T03:09:26.000Z">
+<meta property="article:modified_time" content="2021-08-15T03:37:19.788Z">
+<meta property="article:author" content="Ck">
+<meta property="article:tag" content="cunit">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/794/cunit_registry.jpg">
+
+<link rel="canonical" href="http://example.com/posts/794/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Cunit单元测试 | Cike</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cike</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">it s now or never</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/794/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.gif">
+      <meta itemprop="name" content="Ck">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cike">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Cunit单元测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-15 11:09:26 / 修改时间：11:37:19" itemprop="dateCreated datePublished" datetime="2021-08-15T11:09:26+08:00">2021-08-15</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、CUnit简介"><a href="#1、CUnit简介" class="headerlink" title="1、CUnit简介"></a>1、CUnit简介</h2><p>CUnit 是一个通过 C 语言编写的用于编写、管理和执行单元测试用例的C语言<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/1917084">单元测试</a>框架。<br>它往往被编成库的形式（静态库或动态库）提供给用户测试代码进行使用，用户编写程序的时候直接链接此静态库就可以了。</p>
+<p>它提供了一个简单的单元测试框架，并且为常用的数据类型提供了丰富的断言语句支持。</p>
+<p>CUnit是平台无关的框架与各种用户接口的组合。核心框架为管理测试注册表，套件和测试用例提供了基本支持。用户接口便于与框架交互以运行测试和查看结果。CUnit的组织结构与传统的单元测试框架类似：</p>
+<span id="more"></span>
+<p><img src="/posts/794/cunit_registry.jpg" alt="cunit_registry"></p>
+<p>单独的测试用例（Test）被打包到套件（Suite）中，这些套件又被注册到活动测试注册表（Test Registry）里。每个套件都有自己的构造和析构函数，这两个函数将在运行套件测试之前和之后被自动调用。注册表中的所有套件/测试用例，可以通过调用一个函数执行全部测试，也可以有选择性地执行部分测试。</p>
+<h2 id="2、CUnit安装"><a href="#2、CUnit安装" class="headerlink" title="2、CUnit安装"></a>2、CUnit安装</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="http://cunit.sourceforge.net/">CUnit的首页</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://cunit.sourceforge.net/doc/index.html">CUnit 的文档手册地址</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/benkaoya/article/details/95887879">中文翻译版</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://sourceforge.net/projects/cunit/?source=typ_redirect">CUnit 2-1-3下载地址</a></p>
+</li>
+</ul>
+<h3 id="2-1、安装配置——Ubuntu"><a href="#2-1、安装配置——Ubuntu" class="headerlink" title="2.1、安装配置——Ubuntu"></a>2.1、安装配置——Ubuntu</h3><p>软件源中与CUnit相关的包有:</p>
+<blockquote>
+<p>libcunit1 libcunit1-dev libcunit1-doc libcunit1-ncurses libcunit1-ncurses-dev</p>
+</blockquote>
+<p>使用<code>apt-get install</code>安装即可。</p>
+<h3 id="2-2、安装步骤"><a href="#2-2、安装步骤" class="headerlink" title="2.2、安装步骤"></a>2.2、安装步骤</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar -jxvf CUnit-2.1-3.tar.bz2</span><br><span class="line">cd CUnit-2.1-3</span><br><span class="line">libtoolize -f -c -i</span><br><span class="line">aclocal</span><br><span class="line">autoconf</span><br><span class="line">autoheader</span><br><span class="line">automake</span><br><span class="line">chmod u+x configure</span><br><span class="line">./configure –prefix=/opt/cunit</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3、安装文件目录树"><a href="#2-3、安装文件目录树" class="headerlink" title="2.3、安装文件目录树"></a>2.3、安装文件目录树</h3><p>cunit安装成功后会生成4个文件夹：<strong>doc、include、lib、share</strong>。</p>
+<p><strong>doc</strong>目录是一些简介以及使用说明。<br><img src="/posts/794/cunit_install_doc.png" alt="install"></p>
+<p><code>include</code>和<code>lib</code>目录中是我们需要的头文件以及库文件。</p>
+<p><img src="/posts/794/cunit%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6.png" alt="install_1"></p>
+<p><strong>share</strong>目录中有<strong>Automated</strong>模式下需要的文件。</p>
+<p><img src="/posts/794/cunit_install_share.png" alt="install_2"></p>
+<h2 id="3、CUnit使用介绍"><a href="#3、CUnit使用介绍" class="headerlink" title="3、CUnit使用介绍"></a>3、CUnit使用介绍</h2><h3 id="3-1、输出方式"><a href="#3-1、输出方式" class="headerlink" title="3.1、输出方式"></a>3.1、输出方式</h3><table>
+<thead>
+<tr>
+<th align="left">接口</th>
+<th>平台</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Automated</td>
+<td>All</td>
+<td align="left">非交互式，输出XML文件</td>
+</tr>
+<tr>
+<td align="left"><strong>Basic</strong></td>
+<td><strong>All</strong></td>
+<td align="left"><strong>非交互式，可选输出到stdout</strong></td>
+</tr>
+<tr>
+<td align="left">Console</td>
+<td>All</td>
+<td align="left">控制台交互方式，在用户控制下运行</td>
+</tr>
+<tr>
+<td align="left">Curses</td>
+<td>Linux/Unix</td>
+<td align="left">Curses交互方式（图形界面），在用户控制下运行</td>
+</tr>
+</tbody></table>
+<p>如上边所示，后两种主要是interactive的接口，就是我们可以交互式地指定参数，然后观察结果。在我们具体的环境下，我们通常使用上面两种接口，第一种是将结果输出到XML文档中，便于我们生成报告。第二种仅仅是每一次运行结束之后，在standard output中显示，不能保留测试结果数据。</p>
+<p>我们可以将前两种输出结合起来，自己测试的时候，使用<strong>Basic</strong>模式，生成报告的时候，使用<strong>Automated</strong>模式。</p>
+<blockquote>
+<p>注：在Curse输出模式下需要联接  <code>-lncurses</code></p>
+</blockquote>
+<h3 id="3-2、输出方式对应的接口函数"><a href="#3-2、输出方式对应的接口函数" class="headerlink" title="3.2、输出方式对应的接口函数"></a>3.2、输出方式对应的接口函数</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>使用的接口函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Basic</td>
+<td>#include “CUnit/Basic.h”<br>CU_basic_set_mode(CU_BRM_VERBOSE);<br>CU_basic_run_tests();</td>
+</tr>
+<tr>
+<td>Automated</td>
+<td>#include “CUnit/Automated.h”<br>CU_list_tests_to_file();<br>CU_automated_run_tests();</td>
+</tr>
+<tr>
+<td>Console</td>
+<td>#include “CUnit/Console.h”<br>CU_console_run_tests();</td>
+</tr>
+<tr>
+<td>Curses</td>
+<td>#include “CUnit/CUCurses.h”<br>CU_curses_run_tests();</td>
+</tr>
+</tbody></table>
+<p>配置使用<em><strong>Basic</strong></em>模式，运行的结果如下。</p>
+<p><img src="/posts/794/cunit_basic.png" alt="install_3"></p>
+<p>配置使用<em><strong>Automated</strong></em>模式，重新编译运行后会生成<code>CUnitAutomated-Listing.xml</code>和<code>CUnitAutomated-Results.xml</code>两个文件。文件名是在不设定的情况下，使用默认文件名。</p>
+<p>把项目生成的<code>CUnitAutomated-Listing.xml</code>和<code>CUnitAutomated-Results.xml</code>，与CUnit安装目录下的<code>CUnit-List.dtd</code>、<code>CUnit-List.xsl</code>、<code>CUnit-Run.dtd</code>和<code>CUnit-Run.xsl</code>，共六个文件，放到一个文件夹下，拷贝到window系统下，使用IE浏览器打开。</p>
+<blockquote>
+<p><strong>注意</strong>，要用IE浏览器进行打开，谷歌浏览器和狐火浏览器都无法正确打开。</p>
+</blockquote>
+<center>
+    **TestMax-Results.xml**
+</center>
+
+<p><img src="/posts/794/cunit_automated_result.png" alt="cunit_automated_result"></p>
+<center>
+    TestMax-Listing.xml
+</center>
+
+<p><img src="/posts/794/cunit_automated_listing.png" alt="cunit_automated_listing"></p>
+<h3 id="3-3、测试函数的书写"><a href="#3-3、测试函数的书写" class="headerlink" title="3.3、测试函数的书写"></a>3.3、测试函数的书写</h3><p>1） 首先针对被测试的函数书写测试函数。</p>
+<p>2） 初始化一个Registry。</p>
+<p>3） 将特定的Suite加入到这个<em>Registry</em>中。可以为<em>Suite</em>指定初始化函数和清理函数。</p>
+<p>4） 将测试函数加入到一个<em>Suite</em>中，这样，如果该测试函数的运行需要一些初始化条件，那么可以可以将代码加入到<em>Suite</em>的初始化函数中，当然不要忘记最后还要做对应的清理操作。</p>
+<p>5） 使用相应的接口将测试结果输出。</p>
+<p>6） 最后，清理Registry。</p>
+<h3 id="3-4、CUnit-断言"><a href="#3-4、CUnit-断言" class="headerlink" title="3.4、CUnit 断言"></a>3.4、CUnit 断言</h3><p>CUnit提供了大量的预定义的断言，针对几乎所有的C的标准类型，我们可以针对具体的需要检查的参数的类型进行选择。</p>
+<p><strong>CUnit 对断言定义如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>CU_ASSERT</strong> (int expression)<br><strong>CU_ASSERT_FATAL</strong> (int expression)<br><strong>CU_TEST</strong> (int expression)<br><strong>CU_TEST_FATAL</strong> (int expression)</th>
+<th>断言表达 expression 是 CU_TRUE（非零）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CU_ASSERT_TRUE</strong> (value)<br><strong>CU_ASSERT_TRUE_FATAL</strong> (value)</td>
+<td>断言值 value 是 CU_TRUE（非零）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_FALSE</strong> (value)<br><strong>CU_ASSERT_FALSE_FATAL</strong> (value)</td>
+<td>断言值 value 是 CU_FALSE（零）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_EQUAL</strong> (actual, expected)<br><strong>CU_ASSERT_EQUAL_FATAL</strong> (actual, expected)</td>
+<td>断言 actual （实际） == expected （预期）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_NOT_EQUAL</strong>(actual, expected)<br><strong>CU_ASSERT_NOT_EQUAL_FATAL</strong> (actual,expected)</td>
+<td>断言 actual （实际） != expected（预期）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_PTR_EQUAL</strong> (actual, expected)<br><strong>CU_ASSERT_PTR_EQUAL_FATAL</strong> (actual,expected)</td>
+<td>断言 指针 actual（实际） == expected （预期）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_PTR_NOT_EQUAL</strong> (actual,expected)<br><strong>CU_ASSERT_PTR_NOT_EQUAL_FATAL</strong> (actual, expected)</td>
+<td>断言 指针 actual（实际） != expected （预期）</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_PTR_NULL</strong> (value)<br><strong>CU_ASSERT_PTR_NULL_FATAL</strong> (value)</td>
+<td>断言 指针 value == NULL</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_PTR_NOT_NULL</strong> (value)<br><strong>CU_ASSERT_PTR_NOT_NULL_FATAL</strong> (value)</td>
+<td>断言 指针 value != NULL</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_STRING_EQUAL</strong> (actual,expected)<br><strong>CU_ASSERT_STRING_EQUAL_FATAL</strong> (actual, expected)</td>
+<td>断言的实际和预期的字符串是等价的<br>strcmp</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_STRING_NOT_EQUAL</strong><br> (actual,expected)<br><strong>CU_ASSERT_STRING_NOT_EQUAL_FATAL</strong><br>(actual, expected)</td>
+<td>断言字符串的实际和预期不同</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_NSTRING_EQUAL</strong> (actual,expected, count)<br><strong>CU_ASSERT_NSTRING_EQUAL_FATAL</strong> <br>(actual, expected, count)</td>
+<td>断言的实际和预期的前count个字符是相同的<br>strncmp</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_NSTRING_NOT_EQUAL</strong><br> (actual,expected, count)<br><strong>CU_ASSERT_NSTRING_NOT_EQUAL_FATAL<br></strong>(actual, expected, count)</td>
+<td>断言前count个字符的实际和预期的不同</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_DOUBLE_EQUAL</strong><br> (actual,expected, granularity)<br><strong>CU_ASSERT_DOUBLE_EQUAL_FATAL<br></strong> (actual, expected, granularity)</td>
+<td>Assert that fabs(actual - expected) &lt;= fabs(granularity)<br>Math library must be linked in for this assertion</td>
+</tr>
+<tr>
+<td><strong>CU_ASSERT_DOUBLE_NOT_EQUAL</strong><br> (actual,expected, granularity)<br><strong>CU_ASSERT_DOUBLE_NOT_EQUAL_FATAL<br></strong>(actual, expected, granularity)</td>
+<td>Assert that fabs(actual - expected) &gt;fabs(granularity)<br>Math library must be linked in for this assertion</td>
+</tr>
+<tr>
+<td><strong>CU_PASS</strong> (message)</td>
+<td>注册一个指定的通过断言的消息。不可进行逻辑测试。</td>
+</tr>
+<tr>
+<td><strong>CU_FAIL</strong> (message)<br><strong>CU_FAIL_FATAL</strong> (message)</td>
+<td>注册一个指定的失败断言的消息。不可进行逻辑测试。</td>
+</tr>
+</tbody></table>
+<p>可以看到，每一种类型的断言都有<em><strong>FATAL</strong></em>和非<em><strong>FATAL</strong></em>两个函数，他们的区别是，非<em><strong>FATAL</strong></em>断言失败的时候，程序继续运行，而<em><strong>FATAL</strong></em>类型的断言失败之后，程序马上中止。通常我们使用非<em><strong>FATAL</strong></em>就可以了。</p>
+<p>注意在我们的程序中，需要对返回值，<em><strong>out</strong></em>参数进行判断，对于是否是预想结果的判断的时候，一定要使用断言，而不要使用*<code>printf</code><em>等等函数，一方面</em><code>printf</code>*缺乏灵活性，另一方面，只有使用断言，结果报告中才会有对应的输出项。</p>
+<p><strong>CU_PASS</strong>，<strong>CU_FAIL</strong>这两个断言比较特殊，它们仅仅表示测试程序运行到了这个地方。比如，在某些测试函数中，被测试的函数没有任何返回值等，我们为了证明这个函数已经被运行到了，我们使用以上两个函数。它们仅仅打印出一条消息，代表执行过。还有就是，它们也被输出。</p>
+<h2 id="4、CUnit使用实例"><a href="#4、CUnit使用实例" class="headerlink" title="4、CUnit使用实例"></a>4、CUnit使用实例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;CUnit/Automated.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;CUnit/Basic.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;CUnit/CUnit.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;CUnit/Console.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;CUnit/TestDB.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">suite_success_init</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">suite_success_clean</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_fun1</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_fun2</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">CU_TestInfo test_cases[] = &#123;</span><br><span class="line">    &#123;<span class="string">&quot;test1&quot;</span>, test_fun1&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;test2&quot;</span>, test_fun2&#125;,</span><br><span class="line">    CU_TEST_INFO_NULL</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CU_SuiteInfo suites[] = &#123;</span><br><span class="line">    &#123;<span class="string">&quot;test_cases:&quot;</span>, suite_success_init, suite_success_clean, <span class="literal">NULL</span>, <span class="literal">NULL</span>, test_cases&#125;,</span><br><span class="line">    CU_SUITE_INFO_NULL</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (CU_initialize_registry()) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot; Initialization of Test Registry failed. &quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		assert(<span class="literal">NULL</span> != CU_get_registry());</span><br><span class="line">		assert(!CU_is_test_running());</span><br><span class="line">		<span class="keyword">if</span> (CUE_SUCCESS != CU_register_suites(suites)) &#123;</span><br><span class="line">			<span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0</span></span><br><span class="line">		<span class="comment">/**** Automated Mode *****************/</span></span><br><span class="line">		CU_set_output_filename(<span class="string">&quot;TestMax&quot;</span>);</span><br><span class="line">		CU_automated_run_tests();</span><br><span class="line">		CU_list_tests_to_file();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">		<span class="comment">//***** Basice Mode *******************</span></span><br><span class="line">		CU_basic_set_mode(CU_BRM_VERBOSE);</span><br><span class="line">		CU_basic_run_tests();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        CU_cleanup_registry();</span><br><span class="line">        <span class="keyword">return</span> CU_get_error();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>makefile</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all:</span></span><br><span class="line">	gcc -o test testcase.c -I./<span class="keyword">include</span> -L./lib -lcunit</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+			<a href="/public/tags/cunit/" rel="tag"><i class="fa fa-tag"></i> cunit</a>
+          </div>
+		   <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var golden_ratio = 0.618033988749895;
+                    var s = 0.5;
+                    var v = 0.999;
+                    var h = golden_ratio + Math.random()*0.8 - 0.5;
+                    var h_i = parseInt(h * 6);
+                    var f = h * 6 - h_i;
+                    var p = v * (1 - s);
+                    var q = v * (1 - f * s);
+                    var t = v * (1 - (1 - f) * s);
+                    var r, g, b;
+                    switch (h_i) {
+                        case 0:
+                            r = v;
+                            g = t;
+                            b = p;
+                            break;
+                        case 1:
+                            r = q;
+                            g = v;
+                            b = p;
+                            break;
+                        case 2:
+                            r = p;
+                            g = v;
+                            b = t;
+                            break;
+                        case 3 :
+                            r = p;
+                            g = q;
+                            b = v;
+                            break;
+                        case 4:
+                            r = t;
+                            g = p;
+                            b = v;
+                            break;
+                        case 5:
+                            r = v;
+                            g = p;
+                            b = q;
+                            break;
+                        default:
+                            r = 1;
+                            g = 1;
+                            b = 1;
+                      }
+                    tags[j].style.background = "rgba("+parseInt(r*255)+","+parseInt(g*255)+","+parseInt(b*255)+","+0.5+")";
+                }
+            }
+            </script>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/43167/" rel="prev" title="git">
+      <i class="fa fa-chevron-left"></i> git
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81CUnit%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1、CUnit简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81CUnit%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2、CUnit安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E3%80%81%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E2%80%94%E2%80%94Ubuntu"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、安装配置——Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E3%80%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E3%80%81%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%A0%91"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、安装文件目录树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81CUnit%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">3、CUnit使用介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81%E8%BE%93%E5%87%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、输出方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81%E8%BE%93%E5%87%BA%E6%96%B9%E5%BC%8F%E5%AF%B9%E5%BA%94%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、输出方式对应的接口函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81%E6%B5%8B%E8%AF%95%E5%87%BD%E6%95%B0%E7%9A%84%E4%B9%A6%E5%86%99"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、测试函数的书写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81CUnit-%E6%96%AD%E8%A8%80"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、CUnit 断言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81CUnit%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">4、CUnit使用实例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ck"
+      src="/images/avatar1.gif">
+  <p class="site-author-name" itemprop="name">Ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/cike626" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;cike626" rel="noopener" target="_blank"><i class="fab fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+	
+	<!-- canvas粒子时钟 -->
+	<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ck</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
