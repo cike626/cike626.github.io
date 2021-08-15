@@ -98,12 +98,14 @@
 <p><strong>注意</strong>，要用IE浏览器进行打开，谷歌浏览器和狐火浏览器都无法正确打开。</p>
 </blockquote>
 <center>
-    **TestMax-Results.xml**
+    TestMax-Results.xml
+
 </center>
 
 <p><img src="/posts/794/cunit_automated_result.png" alt="cunit_automated_result"></p>
 <center>
     TestMax-Listing.xml
+
 </center>
 
 <p><img src="/posts/794/cunit_automated_listing.png" alt="cunit_automated_listing"></p>
