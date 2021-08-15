@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、创建git版本库12@ubuntu:~&#x2F;git$ git init Initialized empty Git repository in &#x2F;home&#x2F;aston&#x2F;git&#x2F;.git&#x2F;  瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://example.com/posts/43167/index.html">
+<meta property="og:site_name" content="Cike">
+<meta property="og:description" content="1、创建git版本库12@ubuntu:~&#x2F;git$ git init Initialized empty Git repository in &#x2F;home&#x2F;aston&#x2F;git&#x2F;.git&#x2F;  瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/posts/43167/git_1.2.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_1.2.2.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_1.2.3.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.1.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.1.1.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.1.2.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.1.3.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.1.4.png">
+<meta property="og:image" content="http://example.com/posts/43167/git_2.2.png">
+<meta property="article:published_time" content="2021-06-27T13:49:38.000Z">
+<meta property="article:modified_time" content="2021-08-12T13:23:21.684Z">
+<meta property="article:author" content="Ck">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/43167/git_1.2.png">
+
+<link rel="canonical" href="http://example.com/posts/43167/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git | Cike</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cike</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">it s now or never</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/43167/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.gif">
+      <meta itemprop="name" content="Ck">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cike">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-27 21:49:38" itemprop="dateCreated datePublished" datetime="2021-06-27T21:49:38+08:00">2021-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-12 21:23:21" itemprop="dateModified" datetime="2021-08-12T21:23:21+08:00">2021-08-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/public/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、创建git版本库"><a href="#1、创建git版本库" class="headerlink" title="1、创建git版本库"></a>1、创建git版本库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ubuntu:~/git$ git init </span><br><span class="line">Initialized empty Git repository in /home/aston/git/.git/</span><br></pre></td></tr></table></figure>
+
+<p>瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<p>如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。</p>
+<h3 id="1-1、把文件添加到版本库"><a href="#1-1、把文件添加到版本库" class="headerlink" title="1.1、把文件添加到版本库"></a>1.1、把文件添加到版本库</h3><span id="more"></span>
+<p>创建一个文件，写入一些内容，和把大象放到冰箱需要3步相比，把一个文件放到Git仓库只需要两步。</p>
+<p>第一步，用命令<strong>git add</strong>告诉Git，把文件添加到仓库：</p>
+<blockquote>
+<p>$ git add readme.txt</p>
+</blockquote>
+<p>执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
+<p>第二步，用命令<strong>git commit</strong>告诉Git，把文件提交到仓库：</p>
+<blockquote>
+<p>$ git commit -m “wrote a readme file”<br>[master (root-commit) eaadf4e] wrote a readme file<br>1 file changed, 2 insertions(+)<br>create mode 100644 readme.txt</p>
+</blockquote>
+<p>简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
+<p>为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，比如：</p>
+<blockquote>
+<p>git add file1.txt<br>git add file2.txt file3.txt<br>git commit -m “add 3 files.”</p>
+</blockquote>
+<p>我们已经成功地添加并提交了一个readme.txt文件，现在，是时候继续工作了，于是，我们继续修改readme.txt文件。修改后，运行<strong>git status</strong>命令看看结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ubuntu:~/git$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	modified:   readme.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><code>git status</code>命令可以让我们时刻掌握仓库当前的状态，上面的命令输出告诉我们，readme.txt被修改过了，但还没有准备提交的修改。</p>
+<p>虽然Git告诉我们readme.txt被修改了，但如果能看看具体修改了什么内容，自然是很好的。比如你休假两周从国外回来，第一天上班时，已经记不清上次怎么修改的readme.txt，所以，需要用<code>git diff</code>这个命令看看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">aston@ubuntu:~/git$ git diff readme.txt</span><br><span class="line">diff --git a/readme.txt b/readme.txt</span><br><span class="line">index 0d8382e..3afc585 100644</span><br><span class="line">--- a/readme.txt</span><br><span class="line">+++ b/readme.txt</span><br><span class="line">@@ -5,4 +5,3 @@ Git is a distributed version control system.</span><br><span class="line">Git is free software distributed under the GPL</span><br><span class="line">Git has a mutable index called stage.</span><br><span class="line">Git </span><br><span class="line">-check branch master</span><br></pre></td></tr></table></figure>
+
+<p>git diff顾名思义就是查看difference，显示的格式正是Unix通用的diff格式，可以从上面的命令输出看到，我们在最后一行删除了check branch master。</p>
+<p>知道了对readme.txt作了什么修改后，再把它提交到仓库就放心多了，提交修改和提交新文件是一样的两步，第一步是<strong>git add</strong>，同样没有任何输出。在执行第二步<strong>git commit</strong>之前，我们再运行<strong>git status</strong>看看当前仓库的状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">aston@ubuntu:~/git$ git status </span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">	modified:   readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>git status告诉我们，将要被提交的修改包括readme.txt，下一步，就可以放心地提交了：</p>
+<blockquote>
+<p>aston@ubuntu:~/git$ git commit -m “dd readme “<br>[master 7c56830] dd readme<br>1 file changed, 1 deletion(-)</p>
+</blockquote>
+<p>提交后，我们再用git status命令看看仓库的当前状态：</p>
+<blockquote>
+<p>aston@ubuntu:~/git$ git status<br>On branch master<br>nothing to commit, working directory clean</p>
+</blockquote>
+<p>当然了，在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用<strong>git log</strong>命令查看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">aston@ubuntu:~/git$ git log</span><br><span class="line">commit 7c56830bd6f60d6c6a35efed6aa33de4875ee89b</span><br><span class="line">Author: linux &lt;ARM@linux.com&gt;</span><br><span class="line">Date:   Wed Jul 4 16:48:23 2018 +0800</span><br><span class="line"></span><br><span class="line">    dd readme</span><br><span class="line"></span><br><span class="line">commit 07c23066dc8c104647ab20214d456a5bc5f4a4f6</span><br><span class="line">Author: linux &lt;ARM@linux.com&gt;</span><br><span class="line">Date:   Wed Jul 4 16:45:30 2018 +0800</span><br><span class="line"></span><br><span class="line">    修改readme文件</span><br></pre></td></tr></table></figure>
+
+<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上**–pretty=oneline**参数：</p>
+<h3 id="1-2、版本库"><a href="#1-2、版本库" class="headerlink" title="1.2、版本库"></a>1.2、版本库</h3><p>工作区有一个隐藏目录**.git**，这个不算工作区，而是Git的版本库。</p>
+<p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支<strong>master</strong>，以及指向<strong>master</strong>的一个指针叫<strong>HEAD</strong>。</p>
+<p><img src="/posts/43167/git_1.2.png"></p>
+<p>分支和HEAD的概念我们以后再讲。</p>
+<p>前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：</p>
+<p>第一步是用<strong>git add</strong>把文件添加进去，实际上就是把文件修改添加到暂存区；</p>
+<p>第二步是用<strong>git commit</strong>提交更改，实际上就是把暂存区的所有内容提交到当前分支。</p>
+<p>因为我们创建Git版本库时，Git自动为我们创建了唯一一个<strong>master</strong>分支，所以，现在，<strong>git commit</strong>就是往<strong>master</strong>分支上提交更改。</p>
+<p>你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p>
+<p>通过<strong>git add</strong>将修改过的文件添加到暂存区。</p>
+<p><img src="/posts/43167/git_1.2.2.png"></p>
+<p>所以，git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。</p>
+<p>现在版本库变成了这样，暂存区就没有任何内容了：</p>
+<p><img src="/posts/43167/git_1.2.3.png" alt="git-1.2.3"></p>
+<h3 id="1-3、撤销修改"><a href="#1-3、撤销修改" class="headerlink" title="1.3、撤销修改"></a>1.3、撤销修改</h3><p>Git会告诉你，<strong>git checkout – file</strong>可以丢弃工作区的修改：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -- readme.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>命令<strong>git checkout – readme.txt</strong>意思就是，把<strong>readme.txt</strong>文件在工作区的修改全部撤销，这里有两种情况：</p>
+<p>一种是<strong>readme.txt</strong>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
+<p>一种是<strong>readme.txt</strong>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
+<p>总之，就是让这个文件回到最近一次<strong>git commit</strong>或<strong>git add</strong>时的状。</p>
+<p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<strong>git checkout – file</strong>。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令**git reset HEAD <file>**，就回到了场景1，第二步按场景1操作。</file></p>
+<p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考<code>版本回退</code>一节，不过前提是没有推送到远程库。</p>
+<h3 id="1-4、删除文件"><a href="#1-4、删除文件" class="headerlink" title="1.4、删除文件"></a>1.4、删除文件</h3><p>在Git中，删除也是一个修改操作，我们实战一下，先添加一个新文件test.txt到Git并且提交；<br>一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用rm命令删了：</p>
+<blockquote>
+<p>$ rm test.txt</p>
+</blockquote>
+<p>这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，<strong>git status</strong>命令会立刻告诉你哪些文件被删除了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">(use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">(use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">deleted:    test.txt</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令<strong>git rm</strong>删掉，并且<strong>git commit</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git rm test.txt</span><br><span class="line">rm &#x27;test.txt&#x27;</span><br><span class="line">git commit -m &quot;remove test.txt&quot;</span><br><span class="line">[master d46f35e] remove test.txt</span><br><span class="line"> 1 file changed, 1 deletion(-)</span><br><span class="line"> delete mode 100644 test.txt</span><br></pre></td></tr></table></figure>
+
+<p>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：</p>
+<blockquote>
+<p>$ git checkout – test.txt</p>
+</blockquote>
+<p><strong>git checkout</strong>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+<h3 id="1-5、版本回退"><a href="#1-5、版本回退" class="headerlink" title="1.5、版本回退"></a>1.5、版本回退</h3><p><code>git log</code>命令显示从最近到最远的提交日志，我们可以看到3次提交，最近的一次是append GPL，上一次是add distributed，最早的一次是wrote a readme file。</p>
+<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aston@ubuntu:~/git$ git log --pretty=oneline</span><br><span class="line">67d809fe71f2cec49fa95544e3f7d303fce1afd1 测试git rm</span><br><span class="line">10970fc3ff8b65bf794c55d05a91d5e9317259a1 添加src代码</span><br><span class="line">b794c9d5cd42c87948f6bd79dcdbd3c78885f57d add 2 file start</span><br></pre></td></tr></table></figure>
+
+<p>需要友情提示的是，你看到的一大串类似1094adb…的是commit id（版本号），和SVN不一样，Git的commit id不是1，2，3……递增的数字，而是一个SHA1计算出来的一个非常大的数字，用十六进制表示，而且你看到的commit id和我的肯定不一样，以你自己的为准。为什么commit id需要用这么一大串数字表示呢？因为Git是分布式的版本控制系统，后面我们还要研究多人在同一个版本库里工作，如果大家都用1，2，3……作为版本号，那肯定就冲突了。</p>
+<p>每提交一个新版本，实际上Git就会把它们自动串成一条时间线。如果使用可视化工具查看Git历史，就可以更清楚地看到提交历史的时间线：</p>
+<p>首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交1094adb…（注意我的提交ID和你的肯定不一样），上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。</p>
+<p>现在，我们要把当前版本append GPL回退到上一个版本add distributed，就可以使用git reset命令：</p>
+<blockquote>
+<p>$ git reset –hard HEAD^<br>HEAD is now at e475afc add distributed</p>
+<p>$ git reset –hard 1094a<br>HEAD is now at 83b0afe append GPL</p>
+</blockquote>
+<p>然后顺便把工作区的文件更新了。所以你让HEAD指向哪个版本号，你就把当前版本定位在哪。<br>现在，你回退到了某个版本，关掉了电脑，第二天早上就后悔了，想恢复到新版本怎么办？找不到新版本的commit id怎么办？<br>在Git中，总是有后悔药可以吃的。当你用$ git reset –hard HEAD^回退到add distributed版本时，再想恢复到append GPL，就必须找到append GPL的commit id。Git提供了一个命令git reflog用来记录你的每一次命令：</p>
+<p><strong>现在总结一下：</strong></p>
+<blockquote>
+<p>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset –hard commit_id。</p>
+</blockquote>
+<blockquote>
+<p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。</p>
+</blockquote>
+<blockquote>
+<p>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p>
+</blockquote>
+<h2 id="2、分支管理"><a href="#2、分支管理" class="headerlink" title="2、分支管理"></a>2、分支管理</h2><h3 id="2-1、创建分支"><a href="#2-1、创建分支" class="headerlink" title="2.1、创建分支"></a>2.1、创建分支</h3><p>在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即<strong>master</strong>分支。<strong>HEAD</strong>严格来说不是指向提交，而是指向<strong>master</strong>，<strong>master</strong>才是指向提交的，所以，<strong>HEAD</strong>指向的就是当前分支。</p>
+<p>一开始的时候，<strong>master</strong>分支是一条线，Git用<strong>master</strong>指向最新的提交，再用<strong>HEAD</strong>指向<strong>master</strong>，就能确定当前分支，以及当前分支的提交点：</p>
+<p><img src="/posts/43167/git_2.1.png"></p>
+<p>每次提交，<strong>master</strong>分支都会向前移动一步，这样，随着你不断提交，<strong>master</strong>分支的线也越来越长：<br>当我们创建新的分支，例如<strong>dev</strong>时，Git新建了一个指针叫<strong>dev</strong>，指向<strong>master</strong>相同的提交，再把<strong>HEAD</strong>指向<strong>dev</strong>，就表示当前分支在<strong>dev</strong>上：</p>
+<p><img src="/posts/43167/git_2.1.1.png"></p>
+<p>你看，Git创建一个分支很快，因为除了增加一个<strong>dev</strong>指针，改改<strong>HEAD</strong>的指向，工作区的文件都没有任何变化！</p>
+<p>不过，从现在开始，对工作区的修改和提交就是针对<strong>dev</strong>分支了，比如新提交一次后，dev指针往前移动一步，而master指针不变：</p>
+<p><img src="/posts/43167/git_2.1.2.png"></p>
+<p>假如我们在<strong>dev</strong>上的工作完成了，就可以把<strong>dev</strong>合并到<strong>master</strong>上。Git怎么合并呢？最简单的方法，就是直接把<strong>master</strong>指向<strong>dev</strong>的当前提交，就完成了合并：</p>
+<p><img src="/posts/43167/git_2.1.3.png"></p>
+<p>所以Git合并分支也很快！就改改指针，工作区内容也不变！</p>
+<p>合并完分支后，甚至可以删除<strong>dev</strong>分支。删除<strong>dev</strong>分支就是把<strong>dev</strong>指针给删掉，删掉后，我们就剩下了一条<strong>master</strong>分支：</p>
+<p><img src="/posts/43167/git_2.1.4.png"></p>
+<p>真是太神奇了，你看得出来有些提交是通过分支完成的吗？</p>
+<p>下面开始实战。</p>
+<p>首先，我们创建<strong>dev</strong>分支，然后切换到<strong>dev</strong>分支：</p>
+<blockquote>
+<p>$ git checkout -b dev<br>Switched to a new branch ‘dev’</p>
+</blockquote>
+<p><strong>git checkout</strong>命令加上**-b**参数表示创建并切换，相当于以下两条命令：</p>
+<blockquote>
+<p>git branch dev<br>git checkout dev<br>Switched to branch ‘dev’</p>
+</blockquote>
+<p>然后，用<strong>git branch</strong>命令查看当前分支：</p>
+<blockquote>
+<p>$ git branch</p>
+</blockquote>
+<ul>
+<li>dev<br>  master</li>
+</ul>
+<p><strong>git branch</strong>命令会列出所有分支，当前分支前面会标一个*号。</p>
+<p>然后，我们就可以在<strong>dev</strong>分支上正常提交，比如对readme.txt做个修改，加上一行：然后提交：现在，dev分支的工作完成，我们就可以切换回master分支：</p>
+<blockquote>
+<p>$ git checkout master<br>Switched to branch ‘master’</p>
+</blockquote>
+<h3 id="2-2、合并分支"><a href="#2-2、合并分支" class="headerlink" title="2.2、合并分支"></a>2.2、合并分支</h3><p>切换回<strong>master</strong>分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在<strong>dev</strong>分支上，而<strong>master</strong>分支此刻的提交点并没有变：</p>
+<p><img src="/posts/43167/git_2.2.png"></p>
+<p>现在，我们把<strong>dev</strong>分支的工作成果合并到<strong>master</strong>分支上：</p>
+<blockquote>
+<p>$ git merge dev<br>Updating d46f35e..b17d20e<br>Fast-forward<br>readme.txt | 1 +<br>1 file changed, 1 insertion(+)</p>
+</blockquote>
+<p><strong>git merge</strong>命令用于合并指定分支到当前分支。合并后，再查看readme.txt的内容，就可以看到，和<strong>dev</strong>分支的最新提交是完全一样的。<br>注意到上面的<code>Fast-forward</code>信息，Git告诉我们，这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快。</p>
+<p>当然，也不是每次合并都能<code>Fast-forward</code>，我们后面会讲其他方式的合并。</p>
+<p>合并完成后，就可以放心地删除<strong>dev</strong>分支了</p>
+<blockquote>
+<p>$ git branch -d dev<br>Deleted branch dev (was b17d20e).</p>
+</blockquote>
+<p>删除后，查看<strong>branch</strong>，就只剩下<strong>master</strong>分支了：</p>
+<blockquote>
+<p>$ git branch</p>
+</blockquote>
+<ul>
+<li><p>master</p>
+<p>  因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，这和直接在master分支上工作效果是一样的，但过程更安全。</p>
+</li>
+</ul>
+<h3 id="2-3、git-merge后，后悔了如何回退"><a href="#2-3、git-merge后，后悔了如何回退" class="headerlink" title="2.3、git merge后，后悔了如何回退"></a>2.3、git merge后，后悔了如何回退</h3><p>如果合并一个分支到另一个分支中后后悔了，该怎么处理。总共分三步：<br>第一步：git checkout到你要恢复的那个分支上</p>
+<blockquote>
+<p>git checkout develop</p>
+</blockquote>
+<p>第二步：git reflog查出要回退到merge前的版本号</p>
+<blockquote>
+<p>git reflog</p>
+</blockquote>
+<p>第三步：git reset –hard [版本号]就回退到merge前的代码状态了</p>
+<blockquote>
+<p>git reset –hard f82cfd2</p>
+</blockquote>
+<p>至此回退代码的目标达成。</p>
+<p><strong>小结</strong>：</p>
+<blockquote>
+<p>Git鼓励大量使用分支：</p>
+<p>查看分支：git branch</p>
+<p>创建分支：git branch <name></name></p>
+<p>切换分支：git checkout <name></name></p>
+<p>创建+切换分支：git checkout -b <name></name></p>
+<p>合并某分支到当前分支：git merge <name></name></p>
+<p>删除分支：git branch -d <name></name></p>
+</blockquote>
+<h3 id="2-4、在分支中合并文件夹"><a href="#2-4、在分支中合并文件夹" class="headerlink" title="2.4、在分支中合并文件夹"></a>2.4、在分支中合并文件夹</h3><p>git小技巧–如何从其他分支merge个别文件或文件夹<br>在实际工作中，一个大型的项目或版本迭代可能不是一次上线，可能会分好几次上线，这时候就会涉及创建多个分支，进行分别开发。</p>
+<p><strong>合并分支</strong><br>使用git merge 命令进行分支合并是通用的做法，但是git merge 合并的时候会将两个分支的内容完全合并，如果想合并一部分肯定是不行的。那怎么办？<br>如何从其他分支merge指定文件到当前分支，git checkout 是个合适的工具。</p>
+<blockquote>
+<p>git checkout source_branch &lt;path&gt;… </p>
+</blockquote>
+<p><strong>强制合并</strong><br>我们使用git checkout 将B分支上的系统消息功能添加到A分支上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git branch  * A     B</span>     </span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout B message.html message.css message.js other.js</span> </span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch A<span class="comment"># Changes to be committed:#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)##    new file:   message.css#    new file:   message.html#    new file:   message.js#    modified:   other.js#</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>合并完成</strong><br>注意：在使用git checkout某文件到当前分支时，会将当前分支的对应文件强行覆盖<br>这里新增文件没问题，但是A分支上原有的other.js会被强行覆盖，如果A分支上的other.js有修改，在checkout的时候就会将other.js内容强行覆盖，这样肯定是不行的。如何避免不强制覆盖，往下看。<br><strong>智能合并</strong></p>
+<ol>
+<li>使用git checkout 将根据A分支创建一个A_temp分支，避免影响A分支</li>
+</ol>
+<blockquote>
+<p>$ git checkout -b A_temp</p>
+</blockquote>
+<ol start="2">
+<li>将B分支合并到A_temp分支</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Switched to a new branch &#x27;A_temp&#x27;</span><br><span class="line"><span class="meta">$</span><span class="bash"> git merge BUpdating 1f73596..04627b5Fast-forward message.css                     | 0 message.html                    | 0 message.js                      | 0 other.js                        | 1 + 4 files changed, 1 insertion(+) create mode 100644 message.css create mode 100644 message.html create mode 100644 message.js</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>切换到A分支，并使用git checkout 将A_temp分支上的系统消息功能相关文件或文件夹覆盖到A分支</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout ASwitched to branch <span class="string">&#x27;A&#x27;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout A_temp message.html message.css message.js other.js$ git status On branch A    Changes to be committed:	(use <span class="string">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage)	new file:   message.css    new file:   message.html    new file:   message.js    modified:   other.js</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、标签管理"><a href="#3、标签管理" class="headerlink" title="3、标签管理"></a>3、标签管理</h2><p>发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
+<p>Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
+<p>Git有commit，为什么还要引入tag？<br>“请把上周一的那个版本打包发布，commit号是6a5819e…”<br>“一串乱七八糟的数字不好找！”<br>如果换一个办法：<br>“请把上周一的那个版本打包发布，版本号是v1.2”<br>“好的，按照tag v1.2查找commit就行！”<br>所以，tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起。</p>
+<h3 id="3-1、创建标签"><a href="#3-1、创建标签" class="headerlink" title="3.1、创建标签"></a>3.1、创建标签</h3><p>在Git中打标签非常简单，首先，切换到需要打标签的分支上：<br>默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，怎么办？</p>
+<p>方法是找到历史提交的commit id，然后打上就可以了：<br><code>$ git tag v0.9 f52c633</code><br>再用命令<strong>git tag</strong>查看标签：</p>
+<blockquote>
+<p>$ git tag<br>v0.9<br>v1.0</p>
+</blockquote>
+<p>注意，标签不是按时间顺序列出，而是按字母排序的。可以用git show <tagname>查看标签信息：<br>还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：</tagname></p>
+<blockquote>
+<p>$ git tag -a v0.1 -m “version 0.1 released” 1094adb</p>
+</blockquote>
+<p>用命令<code>git show &lt;tagname&gt;</code>可以看到说明文字：</p>
+<blockquote>
+<p>命令git tag <tagname>用于新建一个标签，默认为HEAD，也可以指定一个commit id；</tagname></p>
+<p>命令git tag -a <tagname> -m “blablabla…”可以指定标签信息；</tagname></p>
+<p>命令git tag可以查看所有标签。</p>
+</blockquote>
+<h3 id="3-2、操作标签"><a href="#3-2、操作标签" class="headerlink" title="3.2、操作标签"></a>3.2、操作标签</h3><p>如果标签打错了也可以删除：</p>
+<blockquote>
+<p>$ git tag -d v0.1<br>Deleted tag ‘v0.1’ (was f15b0dd)</p>
+</blockquote>
+<p>因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。</p>
+<p>如果要推送某个标签到远程，使用命令<code>git push origin &lt;tagname&gt;</code>：</p>
+<blockquote>
+<p>$ git push origin v1.0<br>Total 0 (delta 0), reused 0 (delta 0)<br>To github.com:michaelliao/learngit.git</p>
+<ul>
+<li>[new tag]         v1.0 -&gt; v1.0</li>
+</ul>
+</blockquote>
+<p> 或者，一次性推送全部尚未推送到远程的本地标签：</p>
+<blockquote>
+<p>$ git push origin –tags<br>Total 0 (delta 0), reused 0 (delta 0)<br>To github.com:michaelliao/learngit.git</p>
+<ul>
+<li>[new tag]         v0.9 -&gt; v0.9</li>
+</ul>
+</blockquote>
+<p>如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：</p>
+<blockquote>
+<p>$ git tag -d v0.9<br>Deleted tag ‘v0.9’ (was f52c633)</p>
+</blockquote>
+<p>然后，从远程删除。删除命令也是push，但是格式如下：</p>
+<blockquote>
+<p>$ git push origin :refs/tags/v0.9<br>To github.com:michaelliao/learngit.git</p>
+<ul>
+<li>[deleted]         v0.9</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>小节：</p>
+<ul>
+<li>命令<code>git push origin &lt;tagname&gt;</code>可以推送一个本地标签；</li>
+<li>命令<code>git push origin --tags</code>可以推送全部未推送过的本地标签；</li>
+<li>命令<code>git tag -d &lt;tagname&gt;</code>可以删除一个本地标签；</li>
+<li>命令<code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签。</li>
+</ul>
+</blockquote>
+<h2 id="4、自定义git"><a href="#4、自定义git" class="headerlink" title="4、自定义git"></a>4、自定义git</h2><h3 id="4-1、忽略特殊文件"><a href="#4-1、忽略特殊文件" class="headerlink" title="4.1、忽略特殊文件"></a>4.1、忽略特殊文件</h3><p>在Git工作区的根目录下创建一个特殊的<code>.gitignore</code>文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。</p>
+<p>不需要从头写<code>.gitignore</code>文件，GitHub已经为我们准备了各种配置文件，只需要组合一下就可以使用了。所有配置文件可以直接在线浏览：<a target="_blank" rel="noopener" href="https://github.com/github/gitignore">.gitignore</a><br>忽略文件的原则是：</p>
+<ol>
+<li>忽略操作系统自动生成的文件，比如缩略图等；</li>
+<li>忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的.class文件；</li>
+<li>忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。</li>
+</ol>
+<p>有些时候，你想添加一个文件到Git，但发现添加不了，原因是这个文件被<code>.gitignore</code>忽略了：</p>
+<blockquote>
+<p>$ git add App.class<br>The following paths are ignored by one of your .gitignore files:<br>App.class<br>Use -f if you really want to add them.</p>
+</blockquote>
+<p>如果你确实想添加该文件，可以用-f强制添加到Git：</p>
+<blockquote>
+<p>$ git add -f App.class</p>
+</blockquote>
+<p>或者你发现，可能是<code>.gitignore</code>写得有问题，需要找出来到底哪个规则写错了，可以用<code>git check-ignore</code>命令检查：</p>
+<blockquote>
+<p>$ git check-ignore -v App.class<br>.gitignore:3:*.class    App.class</p>
+</blockquote>
+<p>Git会告诉我们，<code>.gitignore</code>的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。</p>
+<p>小结</p>
+<blockquote>
+<p>忽略某些文件时，需要编写<code>.gitignore</code>；<br><code>.gitignore</code>文件本身要放到版本库里，并且可以对<code>.gitignore</code>做版本管理！</p>
+</blockquote>
+<h3 id="4-2、配置别名"><a href="#4-2、配置别名" class="headerlink" title="4.2、配置别名"></a>4.2、配置别名</h3><p>甚至还有人丧心病狂地把<code>lg</code>配置成了：</p>
+<blockquote>
+<p>git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”</p>
+</blockquote>
+<p>配置文件</p>
+<p>配置Git的时候，加上–global是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用。</p>
+<p>配置文件放哪了？每个仓库的Git配置文件都放在<code>.git/config</code>文件中：</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+			<a href="/public/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          </div>
+		   <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var golden_ratio = 0.618033988749895;
+                    var s = 0.5;
+                    var v = 0.999;
+                    var h = golden_ratio + Math.random()*0.8 - 0.5;
+                    var h_i = parseInt(h * 6);
+                    var f = h * 6 - h_i;
+                    var p = v * (1 - s);
+                    var q = v * (1 - f * s);
+                    var t = v * (1 - (1 - f) * s);
+                    var r, g, b;
+                    switch (h_i) {
+                        case 0:
+                            r = v;
+                            g = t;
+                            b = p;
+                            break;
+                        case 1:
+                            r = q;
+                            g = v;
+                            b = p;
+                            break;
+                        case 2:
+                            r = p;
+                            g = v;
+                            b = t;
+                            break;
+                        case 3 :
+                            r = p;
+                            g = q;
+                            b = v;
+                            break;
+                        case 4:
+                            r = t;
+                            g = p;
+                            b = v;
+                            break;
+                        case 5:
+                            r = v;
+                            g = p;
+                            b = q;
+                            break;
+                        default:
+                            r = 1;
+                            g = 1;
+                            b = 1;
+                      }
+                    tags[j].style.background = "rgba("+parseInt(r*255)+","+parseInt(g*255)+","+parseInt(b*255)+","+0.5+")";
+                }
+            }
+            </script>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/16107/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BAgit%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">1、创建git版本库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E6%8A%8A%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、把文件添加到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E3%80%81%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">1.4、删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E3%80%81%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">1.5.</span> <span class="nav-text">1.5、版本回退</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">2、分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、创建分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E3%80%81%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E3%80%81git-merge%E5%90%8E%EF%BC%8C%E5%90%8E%E6%82%94%E4%BA%86%E5%A6%82%E4%BD%95%E5%9B%9E%E9%80%80"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、git merge后，后悔了如何回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4%E3%80%81%E5%9C%A8%E5%88%86%E6%94%AF%E4%B8%AD%E5%90%88%E5%B9%B6%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、在分支中合并文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">3、标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、创建标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81%E6%93%8D%E4%BD%9C%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、操作标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89git"><span class="nav-number">4.</span> <span class="nav-text">4、自定义git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E3%80%81%E5%BF%BD%E7%95%A5%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、忽略特殊文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E3%80%81%E9%85%8D%E7%BD%AE%E5%88%AB%E5%90%8D"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、配置别名</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ck"
+      src="/images/avatar1.gif">
+  <p class="site-author-name" itemprop="name">Ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/cike626" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;cike626" rel="noopener" target="_blank"><i class="fab fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+	
+	<!-- canvas粒子时钟 -->
+	<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ck</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
