@@ -513,40 +513,15 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/posts/16107/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<span id="more"></span>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JSON简介及C语言开发</title>
     <url>/posts/5299/</url>
-    <content><![CDATA[<h2 id="1、JSON简介"><a href="#1、JSON简介" class="headerlink" title="1、JSON简介"></a>1、JSON简介</h2><p><strong>JSON</strong>全称(<strong>JavaScript</strong> <strong>Object</strong> <strong>Notation</strong>, JS 对象简谱)，是一种轻量级的数据交换格式。</p>
+    <content><![CDATA[<h2 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h2><p><strong>JSON</strong>全称(<strong>JavaScript</strong> <strong>Object</strong> <strong>Notation</strong>, JS 对象简谱)，是一种轻量级的数据交换格式。</p>
 <p><strong>本质就是具有特定格式的字符串</strong>。</p>
 <p><strong>JSON</strong>完全独立与编程语言，比<strong>XML</strong>数据传输的有效性要高很多</p>
 <span id="more"></span>
 
 <p><img src="/posts/5299/json.jpg" alt="json"></p>
-<h2 id="2、JSON语法"><a href="#2、JSON语法" class="headerlink" title="2、JSON语法"></a>2、JSON语法</h2><p><strong>JSON</strong>分为两种大的类型：<strong>json数组</strong>和<strong>json对象</strong>，或者<strong>数组加对象</strong></p>
+<h2 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h2><p><strong>JSON</strong>分为两种大的类型：<strong>json数组</strong>和<strong>json对象</strong>，或者<strong>数组加对象</strong></p>
 <ul>
 <li><p><strong>json对象</strong></p>
 <p>JSON 对象需要在大括号<code>&#123;  &#125;</code>中书写。对象可以包含多个 <strong>key/value（键/值）</strong>对。</p>
@@ -572,23 +547,23 @@
 
 
 
-<h2 id="3、C语言json开源解析库-cJSON"><a href="#3、C语言json开源解析库-cJSON" class="headerlink" title="3、C语言json开源解析库-cJSON"></a>3、C语言json开源解析库-cJSON</h2><h3 id="3-1、cJSON的使用"><a href="#3-1、cJSON的使用" class="headerlink" title="3.1、cJSON的使用"></a>3.1、cJSON的使用</h3><ul>
+<h2 id="C语言json开源解析库-cJSON"><a href="#C语言json开源解析库-cJSON" class="headerlink" title="C语言json开源解析库-cJSON"></a>C语言json开源解析库-cJSON</h2><h3 id="cJSON的使用"><a href="#cJSON的使用" class="headerlink" title="cJSON的使用"></a>cJSON的使用</h3><ul>
 <li>压缩包解压，直接使用里面的cJSON.c和cJSON.h即可</li>
 <li>链接时需要加上<code>-lm</code>表示链接math库</li>
 </ul>
-<h3 id="3-2、创建json对象"><a href="#3-2、创建json对象" class="headerlink" title="3.2、创建json对象"></a>3.2、创建json对象</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个json对象</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateObject</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">//向json对象中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToObject</span><span class="params">(cJSON *object,	<span class="comment">//json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,<span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              cJSON *item)</span></span>;		<span class="comment">//value值（int, string，array，ogj）</span></span><br><span class="line"><span class="comment">//创建一个整型值</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNumber</span><span class="params">(<span class="keyword">double</span> num)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNull</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateTrue</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateFalse</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateBool</span><span class="params">(<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//创建一个字符串</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateString</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span>;</span><br><span class="line"><span class="comment">//创建一个空数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateArray</span><span class="params">(<span class="keyword">void</span>)</span></span>;--空数组</span><br><span class="line"><span class="comment">//创建默认有count个整型值的json数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateIntArray</span><span class="params">(<span class="keyword">int</span> *numbers,<span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="comment">//向json数组中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToArray</span><span class="params">(cJSON *<span class="built_in">array</span>, cJSON *item)</span></span>;</span><br><span class="line"><span class="comment">//释放json结构指针</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>   <span class="title">cJSON_Delete</span><span class="params">(cJSON *c)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">将json结构转化为字符串</span></span><br><span class="line"><span class="comment">返回值需要用free释放</span></span><br><span class="line"><span class="comment">可以将字符串写入文件中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>  *<span class="title">cJSON_Print</span><span class="params">(cJSON *item)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="创建json对象"><a href="#创建json对象" class="headerlink" title="创建json对象"></a>创建json对象</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个json对象</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateObject</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">//向json对象中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToObject</span><span class="params">(cJSON *object,	<span class="comment">//json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,<span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              cJSON *item)</span></span>;		<span class="comment">//value值（int, string，array，ogj）</span></span><br><span class="line"><span class="comment">//创建一个整型值</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNumber</span><span class="params">(<span class="keyword">double</span> num)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNull</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateTrue</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateFalse</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateBool</span><span class="params">(<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//创建一个字符串</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateString</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span>;</span><br><span class="line"><span class="comment">//创建一个空数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateArray</span><span class="params">(<span class="keyword">void</span>)</span></span>;--空数组</span><br><span class="line"><span class="comment">//创建默认有count个整型值的json数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateIntArray</span><span class="params">(<span class="keyword">int</span> *numbers,<span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="comment">//向json数组中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToArray</span><span class="params">(cJSON *<span class="built_in">array</span>, cJSON *item)</span></span>;</span><br><span class="line"><span class="comment">//释放json结构指针</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>   <span class="title">cJSON_Delete</span><span class="params">(cJSON *c)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">将json结构转化为字符串</span></span><br><span class="line"><span class="comment">返回值需要用free释放</span></span><br><span class="line"><span class="comment">可以将字符串写入文件中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>  *<span class="title">cJSON_Print</span><span class="params">(cJSON *item)</span></span>;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-3、删除json数据"><a href="#3-3、删除json数据" class="headerlink" title="3.3、删除json数据"></a>3.3、删除json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-3、解析json数据"><a href="#3-3、解析json数据" class="headerlink" title="3.3、解析json数据"></a>3.3、解析json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//将字符串解析为json结构</span></span><br><span class="line"><span class="comment">//返回值需要用cJSON_Delete释放</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_Parse</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *value)</span></span>;</span><br><span class="line"><span class="comment">//根据键值查找json节点</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetObjectItem</span><span class="params">(cJSON *object,	<span class="comment">//当前json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                           <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span><span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                          )</span></span>;</span><br><span class="line"><span class="comment">//获取json数组中元素的个数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>	<span class="title">cJSON_GetArraySize</span><span class="params">(cJSON *<span class="built_in">array</span>)</span></span>;</span><br><span class="line"><span class="comment">//根据数组下标找到对应的数组元素</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetArrayItem</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> item)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4、修改json数据"><a href="#3-4、修改json数据" class="headerlink" title="3.4、修改json数据"></a>3.4、修改json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//修改数组中的元素，</span></span><br><span class="line"><span class="comment">//参数：array 数组</span></span><br><span class="line"><span class="comment">//which 要修改的数组元素的索引，0.1.2.3</span></span><br><span class="line"><span class="comment">//newitem 修改成新的元素</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInArray</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> which,cJSON *newitem)</span></span>;</span><br><span class="line"><span class="comment">//替换对象中“string”元组的值</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInObject</span><span class="params">(cJSON *object,<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,cJSON *newitem)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="删除json数据"><a href="#删除json数据" class="headerlink" title="删除json数据"></a>删除json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="4、C语言json开源解析库-json-c"><a href="#4、C语言json开源解析库-json-c" class="headerlink" title="4、C语言json开源解析库-json-c"></a>4、C语言json开源解析库-json-c</h2><ul>
+<h3 id="解析json数据"><a href="#解析json数据" class="headerlink" title="解析json数据"></a>解析json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//将字符串解析为json结构</span></span><br><span class="line"><span class="comment">//返回值需要用cJSON_Delete释放</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_Parse</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *value)</span></span>;</span><br><span class="line"><span class="comment">//根据键值查找json节点</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetObjectItem</span><span class="params">(cJSON *object,	<span class="comment">//当前json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                           <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span><span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                          )</span></span>;</span><br><span class="line"><span class="comment">//获取json数组中元素的个数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>	<span class="title">cJSON_GetArraySize</span><span class="params">(cJSON *<span class="built_in">array</span>)</span></span>;</span><br><span class="line"><span class="comment">//根据数组下标找到对应的数组元素</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetArrayItem</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> item)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改json数据"><a href="#修改json数据" class="headerlink" title="修改json数据"></a>修改json数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//修改数组中的元素，</span></span><br><span class="line"><span class="comment">//参数：array 数组</span></span><br><span class="line"><span class="comment">//which 要修改的数组元素的索引，0.1.2.3</span></span><br><span class="line"><span class="comment">//newitem 修改成新的元素</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInArray</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> which,cJSON *newitem)</span></span>;</span><br><span class="line"><span class="comment">//替换对象中“string”元组的值</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInObject</span><span class="params">(cJSON *object,<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,cJSON *newitem)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="C语言json开源解析库-json-c"><a href="#C语言json开源解析库-json-c" class="headerlink" title="C语言json开源解析库-json-c"></a>C语言json开源解析库-json-c</h2><ul>
 <li>软件环境说明：</li>
 </ul>
 <table>
@@ -611,7 +586,7 @@
 <li>参考说明：</li>
 </ul>
 <p><strong>json-c安装说明</strong> <a href="http://www.linuxfromscratch.org/blfs/view/svn/general/json-c.html">^1</a></p>
-<h3 id="4-1、json-c的使用"><a href="#4-1、json-c的使用" class="headerlink" title="4.1、json-c的使用"></a>4.1、json-c的使用</h3><ul>
+<h3 id="json-c的使用"><a href="#json-c的使用" class="headerlink" title="json-c的使用"></a>json-c的使用</h3><ul>
 <li>获取源码</li>
 </ul>
 <p>可到<a href="http://www.linuxfromscratch.org/blfs/view/svn/general/json-c.html">json-c</a>网站中下载<a href="https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz">JSON-C-0.13.1</a>源码</p>
@@ -642,16 +617,405 @@
 <li>安装的库文件：ibjson-c.so and libjson.so</li>
 <li>安装的头文件：/usr/include/json and /usr/include/json-c</li>
 </ol>
-<h3 id="4-2、自测代码"><a href="#4-2、自测代码" class="headerlink" title="4.2、自测代码"></a>4.2、自测代码</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;json.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">object</span>=</span>json_object_new_object();</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">json_string</span>=</span>json_object_new_string (<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	<span class="keyword">int</span> a=json_object_object_add (object, <span class="string">&quot;test&quot;</span>, json_string);</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *object_string=json_object_to_json_string(object);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;object_string=%s\n&quot;</span>,object_string);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="自测代码"><a href="#自测代码" class="headerlink" title="自测代码"></a>自测代码</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;json.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">object</span>=</span>json_object_new_object();</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">json_string</span>=</span>json_object_new_string (<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	<span class="keyword">int</span> a=json_object_object_add (object, <span class="string">&quot;test&quot;</span>, json_string);</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *object_string=json_object_to_json_string(object);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;object_string=%s\n&quot;</span>,object_string);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -o test json.c -ljson-c -I /usr/include/json-c/ -L /usr/lib/</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-3、API说明"><a href="#4-3、API说明" class="headerlink" title="4.3、API说明"></a>4.3、API说明</h3><p>参考：<a href="https://www.jianshu.com/p/659bb1b09f1b">JSON解析器json-c</a></p>
-<h3 id="4-4、移植"><a href="#4-4、移植" class="headerlink" title="4.4、移植"></a>4.4、移植</h3>]]></content>
+<h3 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h3><p>参考：<a href="https://www.jianshu.com/p/659bb1b09f1b">JSON解析器json-c</a></p>
+<h3 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h3>]]></content>
       <tags>
         <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux shell编程</title>
+    <url>/posts/53574/</url>
+    <content><![CDATA[<p><img src="/posts/53574/linux_shell.png" alt="linux_shell"></p>
+<span id="more"></span>
+
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="正则表达式与通配符"><a href="#正则表达式与通配符" class="headerlink" title="正则表达式与通配符"></a>正则表达式与通配符</h3><p><strong>正则表达式</strong><code>用来在文件中匹配符合条件的字符串</code>，正则是包含匹配。grep、awk、sed等命令可以支持正则表达式。</p>
+<p><strong>通配符</strong><code>用来匹配符合条件的文件名</code>，通配符是完全匹配。ls，find，cp这些命令不支持正则表达式，所以只能使用shell自己的通配符来进行匹配。</p>
+<h3 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h3><table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>*</code></td>
+<td align="left">前一个字符匹配0次或多次。</td>
+</tr>
+<tr>
+<td align="center"><code>.</code></td>
+<td align="left">匹配除了换行符外任意一个字符</td>
+</tr>
+<tr>
+<td align="center"><code>^</code></td>
+<td align="left">匹配行首。例如：^hello会匹配以hello开头的行</td>
+</tr>
+<tr>
+<td align="center"><code>$</code></td>
+<td align="left">匹配行尾。例如：hello&amp;会匹配以hello结尾的行。</td>
+</tr>
+<tr>
+<td align="center"><code>[ ]</code></td>
+<td align="left">匹配中括号中指定的任意一个字符，只匹配一个字符。<br>例如：<code>[aoelu]</code>匹配任意一个元音字母，<code>[0-9]</code>匹配任意一位数字，<br><code>[a-z] [0-9]</code> 匹配小写字和一位数字构成的两位字符。</td>
+</tr>
+<tr>
+<td align="center"><code>[^]</code></td>
+<td align="left">匹配除中括号的字符以外的任意一个字符。<br>例如:<code>[^0-9]</code>匹配任意一位非数字字符,<br><code>[^a-z]</code>表示任意一位非小写字母。</td>
+</tr>
+<tr>
+<td align="center"><code>\</code></td>
+<td align="left">转义符。用于取消讲特殊符号的含义取消。</td>
+</tr>
+<tr>
+<td align="center"><code>\&#123;n\&#125;</code></td>
+<td align="left">标识其前面的字符恰好出现n次。例如:<code>[09]\&#123;4\&#125;</code>匹配4位数字，<br><code>[1][3-8][0-9]\&#123;9\&#125;</code>匹配手机号码。</td>
+</tr>
+<tr>
+<td align="center"><code>\&#123;n,\&#125;</code></td>
+<td align="left">表示其前面的字符出现不小于n次。<br>例如:<code>[0-9]\&#123;2,\&#125;</code>表示两位及以上的数字。</td>
+</tr>
+<tr>
+<td align="center"><code>\&#123;n,m\&#125;</code></td>
+<td align="left">表示其前面的字符至少出现n次,最多出现m次。<br>例如:<code>[a-z]\&#123;6,8\&#125;</code>匹配6到8位的小写字母。</td>
+</tr>
+</tbody></table>
+<p><code>grep &quot;^$&quot; xxx.txt</code>表示比配空白行，<code>grep -n &quot;^$&quot; xxx.txt</code>匹配空白行并打印行号。</p>
+<h2 id="字符串截取命令-cut命令"><a href="#字符串截取命令-cut命令" class="headerlink" title="字符串截取命令-cut命令"></a>字符串截取命令-cut命令</h2><p>字段提取命令<strong>cut</strong>：cut [选项] 文件名，一般与<strong>grep</strong>联合使用。</p>
+<ul>
+<li>-f：列号，提取第几列</li>
+<li>-d：分隔符，按照指定分隔符分割列；默认分隔符为制表符<code>/t</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cut -d &quot;:&quot; -f 1,3 /etc/passwd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注</strong>：但是<strong>cut</strong>命令是有局限性的，如果分隔符是空格，或多个空格，<strong>cut</strong>就不能很好的使用。</p>
+</blockquote>
+<h2 id="字符串截取命令-printf命令"><a href="#字符串截取命令-printf命令" class="headerlink" title="字符串截取命令-printf命令"></a>字符串截取命令-printf命令</h2><blockquote>
+<p>printf ‘输出类型输出格式’ 输出内容</p>
+</blockquote>
+</li>
+<li><strong>输出类型：</strong></li>
+</ul>
+<p>%ns：输出字符串。n是数字指定输出几个字符<br>%ni：输出整数。n是数字指定输出几个数字<br>%m.nf：输出浮点型。m和n是数字，指定输出的整数位数和小数位数。如***%8.2f***代表共输出8位数，其中2位是小数，6位是整数。</p>
+<ul>
+<li><strong>输出格式</strong></li>
+</ul>
+<blockquote>
+<p>\a：输出警告声音<br>\b：输出退格键，Backspace键<br>\f：清除屏幕<br>\n：换行<br>\r：回车<br>\t：水平输出退格键，Tab键<br>\v：垂直输出退格键，Tab键</p>
+</blockquote>
+<p><strong>printf</strong>不能打印文件的内容，也不能通过管道符接收文件的内容。<strong>printf</strong>命令一般不会单独使用，都是在<strong>awk</strong>命令中使用，在系统中直接使用不多。</p>
+<p>在<strong>awk</strong>命令中的输出支持<strong>print</strong>和<strong>printf</strong>命令</p>
+<ul>
+<li><p><strong>print</strong>：<strong>print</strong>会在每个输出后面自动加换行符（linux系统默认没有<strong>print</strong>命令）</p>
+</li>
+<li><p><strong>printf</strong>：<strong>printf</strong>是标准格式输出命令，并不会自动加换行符，如果需要换行，需要手动添加换行符。</p>
+<h2 id="字符串截取命令-awk命令"><a href="#字符串截取命令-awk命令" class="headerlink" title="字符串截取命令-awk命令"></a>字符串截取命令-awk命令</h2></li>
+<li><p><em>awk</em>* ‘条件1｛动作1｝ 条件2 ｛动作2｝ …’ 文件名</p>
+</li>
+<li><p>条件（Pattern）：</p>
+<blockquote>
+<p>一般使用关系表达式作为条件：<br>x&gt;10，x&lt;=10，x&gt;=10</p>
+</blockquote>
+</li>
+<li><p>动作（Action）：</p>
+<blockquote>
+<p>格式化输出<br>流程控制语句</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>awk</strong>虽然是列提取命令，但是<strong>awk</strong>是先读取一行数据，然后<strong>$1</strong>代表第一列数据，<strong>$2</strong>代表第二列数据，依次类推，<strong>$0</strong>代表正行数据。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">打印文件第2和第6列</span></span><br><span class="line">awk &#x27;&#123; printf 	\$2 &quot;\t&quot; \$6 &quot;\n&quot; &#125;&#x27; file.txt</span><br><span class="line"><span class="meta">#</span><span class="bash">打印磁盘使用率</span></span><br><span class="line">df -h | grep ada5 | awk &#x27;&#123; printf $5 &#125;&#x27; | cut -d &quot;%&quot; -f 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BEGIN选项</li>
+</ul>
+<p>在进行真正的数据读取前先执行<strong>BEGIN</strong>中的命令。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">awk &#x27;BUGIN &#123;print &quot;This is  a transctript&quot;&#125; &#123;print \$2 &quot;\t&quot; \$6 &#125; file.txt</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>FS 内置变量</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">awk &#x27;BEGIN &#123;FS=&quot;:&quot;&#125; &#123;print \$1 &quot;\t&quot; \$3 &#125;&#x27;  /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>在读取数据前，先指定分隔符为“：”。如果不加<strong>BUGIN</strong>第一行会被全部打印出来，与期待结果不一致。</p>
+</li>
+<li><p>END</p>
+</li>
+</ul>
+<p>在动作执行结束后执行xx命令。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">awk &#x27;BEGIN &#123;FS=&quot;:&quot;&#125; END&#123;print &quot;aaaaaaa&quot;&#125;&#123;print \$1 &quot;\t&quot; \$3 &#125;&#x27;  /etc/passwd</span><br></pre></td></tr></table></figure>
+<h2 id="字符串截取命令-sed命令"><a href="#字符串截取命令-sed命令" class="headerlink" title="字符串截取命令-sed命令"></a>字符串截取命令-sed命令</h2><p><strong>sed</strong>是一种几乎包括在所有UNIX平台（包括linux）的轻量级流编辑器。<strong>sed</strong>主要是用来将数据进行选取、替换、删除、新增的命令。<br><strong>sed</strong> [选项] ‘[动作]’ 文件名</p>
+<blockquote>
+<p>选项：<br><code>-n</code>：一般sed命令会把所有数据输出到屏幕。如果加了该选项，则只会把经过sed命令处理过的行输出到屏幕；<br><code>-e</code>：允许多个条件同时执行，不同条件之间用<code>；</code>隔开；<br><code>-i</code>：用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出；</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>动作：<br>a\：追加，在当前行后面增加一行或多行。增加多行时，除最后一行外，每行末尾需要加“\”代表数据未完结；<br>c\：行替换，用<code>c</code>后面的字符串替换源数据行，替换多行时，除最后一行外，每行末尾需用“\”代表数据未完结；<br>i\：插入，在当前行前插入一行或多行，插入多行时，除最后一行外，每行末尾需用“\”代表数据未完结；<br>d：删除；<br>p：打印，输出指定的行；<br>s：字符串替换，用一个字符串替换另一个字符串。格式为<code>行范围s/旧字串/新字串、g</code>（和vim中的替换格式类似）</p>
+</blockquote>
+<ol>
+<li>行数据操作<br><strong>sed -n ‘2p’ file.txt</strong>：打印文件第二行，加-n选项只打印第二行，否则会打印全部文件。</li>
+<li>文件删除<br><strong>sed ‘2,3d’ file.txt</strong>：删除文件2-3行，只影响输出结果，不影响文件本身。 </li>
+<li>文件追加<br><strong>sed ‘2a hello’ file.txt <strong>:在文件第2行后面加入</strong>hello</strong><br><strong>sed ‘2i  hello’ file.txt <strong>:在文件第2行前面加入</strong>hello</strong></li>
+<li>行替换<br><strong>sed ‘4c no person’ file.txt</strong>：将第4行数据替换为<strong>no persion</strong></li>
+<li>字符串替换<br><strong>sed ’3s/77/99/g‘ file.txt</strong>：将第3行的77替换为99<br><strong>sed -e ‘s/gao//g;s/chao//g’ file.txt</strong>     <h2 id="字符处理命令"><a href="#字符处理命令" class="headerlink" title="字符处理命令"></a>字符处理命令</h2></li>
+</ol>
+<h3 id="排序命令sort"><a href="#排序命令sort" class="headerlink" title="排序命令sort"></a>排序命令<strong>sort</strong></h3><p><code> sort [选项] 文件名</code></p>
+<blockquote>
+<p>选项：</p>
+<ul>
+<li>-f：忽略大小写</li>
+<li>-n：以数值型进行排序，默认使用字符串排序</li>
+<li>-r：反向排序</li>
+<li>-t：指定分隔符，默认使用制表符</li>
+<li>-k n[,m]：按照指定的字段范围排序。从第n字段开始，m字段结束（默认到行尾）</li>
+<li>-u：去除重复行 </li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">使用：为分隔符，以第三个字段排序，以数值型排序</span></span><br><span class="line">sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</span><br></pre></td></tr></table></figure>
+<h3 id="统计命令wc"><a href="#统计命令wc" class="headerlink" title="统计命令wc"></a>统计命令<strong>wc</strong></h3><p><code>wc [选项] 文件名</code></p>
+<blockquote>
+<p>选项：</p>
+<ul>
+<li>-l：只统计行数</li>
+<li>-w：只统计单词数</li>
+<li>-m：只统计字符数</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="替换命令tr"><a href="#替换命令tr" class="headerlink" title="替换命令tr"></a>替换命令tr</h3><p><code>tr [OPTION]... SET1 [SET2]</code></p>
+<p>选项：</p>
+<ul>
+<li><p>-s：替换重复的字符</p>
+</li>
+<li><p>-d：删除字符</p>
+</li>
+</ul>
+<blockquote>
+<p>-d：delete，删除SET1中指定的所有字符，不转换</p>
+</blockquote>
+<ul>
+<li>-t：字符替换</li>
+</ul>
+<blockquote>
+<p>-t：truncate，将SET1中字符用SET2对应位置的字符进行替换，一般缺省为-t</p>
+</blockquote>
+<ul>
+<li>-c：字符补集替换</li>
+</ul>
+<blockquote>
+<p>-c：complement，用SET2替换SET1中没有包含的字符</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">将空格替换为换行符</span></span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt </span><br><span class="line">the day is sunny the the</span><br><span class="line">the sunny is is</span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt | tr -s &#x27; &#x27; &#x27;\n&#x27;</span><br><span class="line">the</span><br><span class="line">day</span><br><span class="line">is</span><br><span class="line">sunny</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">sunny</span><br><span class="line">is</span><br><span class="line">is</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux_shell1</title>
+    <url>/posts/40073/</url>
+    <content><![CDATA[<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">判断文件是否存在</span></span><br><span class="line">test -e file.txt</span><br><span class="line">echo $?</span><br></pre></td></tr></table></figure>
+
+<h3 id="按照文件类型进行判断"><a href="#按照文件类型进行判断" class="headerlink" title="按照文件类型进行判断"></a>按照文件类型进行判断</h3><table>
+<thead>
+<tr>
+<th align="center">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-b文件</td>
+<td align="center">判断文件是否存在，并且是否是块设备文件（是块设备文件为真）</td>
+</tr>
+<tr>
+<td align="center">-c文件</td>
+<td align="center">判断文件是否存在，并且是否是字符设备文件（是字符设备文件为真）</td>
+</tr>
+<tr>
+<td align="center"><strong>-d文件</strong></td>
+<td align="center"><strong>判断文件是否存在，并且是否为目录文件（是目录文件为真）</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-e文件</strong></td>
+<td align="center"><strong>判断文件是否存在（存在为真）</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-f文件</strong></td>
+<td align="center"><strong>判断文件是否存在，并且是否为普通文件（是普通文件为真）</strong></td>
+</tr>
+<tr>
+<td align="center">-L文件</td>
+<td align="center">判断文件是否存在，并且是否为符号链接文件（是符号链接文件为真）</td>
+</tr>
+<tr>
+<td align="center">-p文件</td>
+<td align="center">判断文件是否存在，并且是否为管道文件（是管道文件为真）</td>
+</tr>
+<tr>
+<td align="center">-s文件</td>
+<td align="center">判断文件是否存在，并且是否为非空（非空为真）</td>
+</tr>
+<tr>
+<td align="center">-S文件</td>
+<td align="center">判断文件是否存在，并且是否为套接字文件（是套接字文件为真）</td>
+</tr>
+</tbody></table>
+<p><code>[ -d /root ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</code></p>
+<h3 id="按照文件权限进行判断"><a href="#按照文件权限进行判断" class="headerlink" title="按照文件权限进行判断"></a>按照文件权限进行判断</h3><table>
+<thead>
+<tr>
+<th align="center">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-r文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有读权限（有读权限为真）</td>
+</tr>
+<tr>
+<td align="center">-w文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有写权限（有写权限为真）</td>
+</tr>
+<tr>
+<td align="center">-x文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有执行权限（有执行权限为真）</td>
+</tr>
+<tr>
+<td align="center">-u文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有SUID权限（有SUID权限为真）</td>
+</tr>
+<tr>
+<td align="center">-g文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有SGID权限（有SGID权限为真）</td>
+</tr>
+<tr>
+<td align="center">-k文件</td>
+<td align="center">判断文件是否存在，并且是否该文件拥有SBit权限（有SBit权限为真）</td>
+</tr>
+</tbody></table>
+<h3 id="两个文件之间比较"><a href="#两个文件之间比较" class="headerlink" title="两个文件之间比较"></a>两个文件之间比较</h3><table>
+<thead>
+<tr>
+<th align="center">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">文件1 -nt 文件2</td>
+<td align="center">判断文件1的修改时间是否比文件2的新（如果新则为真）</td>
+</tr>
+<tr>
+<td align="center">文件1 -ot 文件2</td>
+<td align="center">判断文件1的修改时间是否比文件2的旧（如果旧则为真）</td>
+</tr>
+<tr>
+<td align="center">文件1 -ef 文件2</td>
+<td align="center">判断文件1是否和文件2的<strong>lnode</strong>号一致，理解为两个文件是否为同一个文件。用于判断硬链接</td>
+</tr>
+</tbody></table>
+<h3 id="两个整数比较"><a href="#两个整数比较" class="headerlink" title="两个整数比较"></a>两个整数比较</h3><table>
+<thead>
+<tr>
+<th align="left">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">整数1 -eq 整数2</td>
+<td align="center">判断两个整数是否相等（相等为真）</td>
+</tr>
+<tr>
+<td align="left">整数1 -ne 整数2</td>
+<td align="center">判断两个整数是否不相等（不相等为真）</td>
+</tr>
+<tr>
+<td align="left">整数1 -gt 整数2</td>
+<td align="center">判断整数1是否大于整数2（大于为真）</td>
+</tr>
+<tr>
+<td align="left">整数1 -lt 整数2</td>
+<td align="center">判断整数1是否小于整数2（小于为真）</td>
+</tr>
+<tr>
+<td align="left">整数1 -ge 整数2</td>
+<td align="center">判断整数1是否大于等于整数2（大于等于为真）</td>
+</tr>
+<tr>
+<td align="left">整数1 -le 整数2</td>
+<td align="center">判断整数1是否小于等于整数2（小于等于为真）</td>
+</tr>
+</tbody></table>
+<h3 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断"></a>字符串判断</h3><table>
+<thead>
+<tr>
+<th align="left">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-z字符串</td>
+<td align="center">判断字符串是否为空（为空返回真）</td>
+</tr>
+<tr>
+<td align="left">-n字符串</td>
+<td align="center">判断字符串是否非空（非空返回真）</td>
+</tr>
+<tr>
+<td align="left">字符串1 == 字符串2</td>
+<td align="center">判断字符串1是否和字符串2相等（相等返回真）</td>
+</tr>
+<tr>
+<td align="left">字符串1 != 字符串2</td>
+<td align="center">判断字符串1是否和字符串2不相等（不相等返回真）</td>
+</tr>
+</tbody></table>
+<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<thead>
+<tr>
+<th align="left">测试选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">判断1 -a 判断2</td>
+<td align="center">逻辑与，判断1和2都成立为真</td>
+</tr>
+<tr>
+<td align="left">判断1 -o 判断2</td>
+<td align="center">逻辑或，判断1和2有一个成立为真</td>
+</tr>
+<tr>
+<td align="left">！判断</td>
+<td align="center">逻辑非，使原始的判断取反</td>
+</tr>
+</tbody></table>
+<h2 id="流程控制-if语句"><a href="#流程控制-if语句" class="headerlink" title="流程控制-if语句"></a>流程控制-if语句</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ];then</span><br><span class="line">    程序</span><br><span class="line">fi</span><br><span class="line">或者</span><br><span class="line">if [ 条件判断式 ]</span><br><span class="line">then</span><br><span class="line">		程序</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>if</strong>语句使用<strong>fi</strong>结尾；</li>
+<li>[ 条件判断式 ]就是使用<strong>test</strong>命令判断，所以中括号与判断式之间必须有空格 ；</li>
+<li><strong>then</strong>后面跟符合条件之后执行的程序，可以放在[]后面用<code>；</code>隔开，也可以换行写，不需要<code>；</code>。</li>
+</ul>
+<h2 id="流程控制-case语句"><a href="#流程控制-case语句" class="headerlink" title="流程控制-case语句"></a>流程控制-case语句</h2><p>多分支case条件语句</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">case $变量 in</span><br><span class="line">	&quot;值1&quot;)</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span> something</span></span><br><span class="line">	;;</span><br><span class="line">	&quot;值2&quot;)</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span> something</span></span><br><span class="line">	;;</span><br><span class="line">	*)</span><br><span class="line"><span class="meta">	#</span><span class="bash">other to <span class="keyword">do</span> somethong</span></span><br><span class="line">	;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程控制-for循环"><a href="#流程控制-for循环" class="headerlink" title="流程控制-for循环"></a>流程控制-for循环</h2><ul>
+<li>语法1</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for 变量 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<ul>
+<li>语法2</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for (( 初始值；循环条件；变量变化 ))</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="流程控制-while循环和unite循环"><a href="#流程控制-while循环和unite循环" class="headerlink" title="流程控制-while循环和unite循环"></a>流程控制-while循环和unite循环</h2><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>while循环是不定循环，也称条件循环。只要条件判断式成立，循环就一直继续，直到条件判断式不成立，循环才停止。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">while [ 条件判断式 ]</span><br><span class="line">do </span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span> </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="unite循环"><a href="#unite循环" class="headerlink" title="unite循环"></a>unite循环</h3><p>unite循环和while循环相反，unite循环是只要条件判断式不成立则进行循环。一旦循环条件成立，则终止循环。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unite [ 条件判断式 ]</span><br><span class="line">do </span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span> </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>shell</tag>
       </tags>
   </entry>
 </search>
