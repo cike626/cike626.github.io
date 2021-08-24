@@ -625,19 +625,22 @@
 
 <h3 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h3><p>参考：<a href="https://www.jianshu.com/p/659bb1b09f1b">JSON解析器json-c</a></p>
 <h3 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h3>]]></content>
+      <categories>
+        <category>json</category>
+      </categories>
       <tags>
         <tag>json</tag>
       </tags>
   </entry>
   <entry>
-    <title>linux shell编程</title>
+    <title>linux shell编程 第一篇</title>
     <url>/posts/53574/</url>
     <content><![CDATA[<p><img src="/posts/53574/linux_shell.png" alt="linux_shell"></p>
 <span id="more"></span>
 
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="正则表达式与通配符"><a href="#正则表达式与通配符" class="headerlink" title="正则表达式与通配符"></a>正则表达式与通配符</h3><p><strong>正则表达式</strong><code>用来在文件中匹配符合条件的字符串</code>，正则是包含匹配。grep、awk、sed等命令可以支持正则表达式。</p>
+<h2 id="1、正则表达式"><a href="#1、正则表达式" class="headerlink" title="1、正则表达式"></a>1、正则表达式</h2><h3 id="1-1、正则表达式与通配符"><a href="#1-1、正则表达式与通配符" class="headerlink" title="1.1、正则表达式与通配符"></a>1.1、正则表达式与通配符</h3><p><strong>正则表达式</strong><code>用来在文件中匹配符合条件的字符串</code>，正则是包含匹配。grep、awk、sed等命令可以支持正则表达式。</p>
 <p><strong>通配符</strong><code>用来匹配符合条件的文件名</code>，通配符是完全匹配。ls，find，cp这些命令不支持正则表达式，所以只能使用shell自己的通配符来进行匹配。</p>
-<h3 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h3><table>
+<h3 id="1-2、基础正则表达式"><a href="#1-2、基础正则表达式" class="headerlink" title="1.2、基础正则表达式"></a>1.2、基础正则表达式</h3><table>
 <thead>
 <tr>
 <th align="center">元字符</th>
@@ -686,14 +689,14 @@
 </tr>
 </tbody></table>
 <p><code>grep &quot;^$&quot; xxx.txt</code>表示比配空白行，<code>grep -n &quot;^$&quot; xxx.txt</code>匹配空白行并打印行号。</p>
-<h2 id="字符串截取命令-cut命令"><a href="#字符串截取命令-cut命令" class="headerlink" title="字符串截取命令-cut命令"></a>字符串截取命令-cut命令</h2><p>字段提取命令<strong>cut</strong>：cut [选项] 文件名，一般与<strong>grep</strong>联合使用。</p>
+<h2 id="2、字符串截取命令-cut命令"><a href="#2、字符串截取命令-cut命令" class="headerlink" title="2、字符串截取命令-cut命令"></a>2、字符串截取命令-cut命令</h2><p>字段提取命令<strong>cut</strong>：cut [选项] 文件名，一般与<strong>grep</strong>联合使用。</p>
 <ul>
 <li>-f：列号，提取第几列</li>
 <li>-d：分隔符，按照指定分隔符分割列；默认分隔符为制表符<code>/t</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cut -d &quot;:&quot; -f 1,3 /etc/passwd</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>注</strong>：但是<strong>cut</strong>命令是有局限性的，如果分隔符是空格，或多个空格，<strong>cut</strong>就不能很好的使用。</p>
 </blockquote>
-<h2 id="字符串截取命令-printf命令"><a href="#字符串截取命令-printf命令" class="headerlink" title="字符串截取命令-printf命令"></a>字符串截取命令-printf命令</h2><blockquote>
+<h2 id="3、字符串截取命令-printf命令"><a href="#3、字符串截取命令-printf命令" class="headerlink" title="3、字符串截取命令-printf命令"></a>3、字符串截取命令-printf命令</h2><blockquote>
 <p>printf ‘输出类型输出格式’ 输出内容</p>
 </blockquote>
 </li>
@@ -712,7 +715,7 @@
 <li><p><strong>print</strong>：<strong>print</strong>会在每个输出后面自动加换行符（linux系统默认没有<strong>print</strong>命令）</p>
 </li>
 <li><p><strong>printf</strong>：<strong>printf</strong>是标准格式输出命令，并不会自动加换行符，如果需要换行，需要手动添加换行符。</p>
-<h2 id="字符串截取命令-awk命令"><a href="#字符串截取命令-awk命令" class="headerlink" title="字符串截取命令-awk命令"></a>字符串截取命令-awk命令</h2></li>
+<h2 id="4、-字符串截取命令-awk命令"><a href="#4、-字符串截取命令-awk命令" class="headerlink" title="4、 字符串截取命令-awk命令"></a>4、 字符串截取命令-awk命令</h2></li>
 <li><p><em>awk</em>* ‘条件1｛动作1｝ 条件2 ｛动作2｝ …’ 文件名</p>
 </li>
 <li><p>条件（Pattern）：</p>
@@ -743,7 +746,7 @@
 </ul>
 <p>在动作执行结束后执行xx命令。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">awk &#x27;BEGIN &#123;FS=&quot;:&quot;&#125; END&#123;print &quot;aaaaaaa&quot;&#125;&#123;print \$1 &quot;\t&quot; \$3 &#125;&#x27;  /etc/passwd</span><br></pre></td></tr></table></figure>
-<h2 id="字符串截取命令-sed命令"><a href="#字符串截取命令-sed命令" class="headerlink" title="字符串截取命令-sed命令"></a>字符串截取命令-sed命令</h2><p><strong>sed</strong>是一种几乎包括在所有UNIX平台（包括linux）的轻量级流编辑器。<strong>sed</strong>主要是用来将数据进行选取、替换、删除、新增的命令。<br><strong>sed</strong> [选项] ‘[动作]’ 文件名</p>
+<h2 id="5、-字符串截取命令-sed命令"><a href="#5、-字符串截取命令-sed命令" class="headerlink" title="5、 字符串截取命令-sed命令"></a>5、 字符串截取命令-sed命令</h2><p><strong>sed</strong>是一种几乎包括在所有UNIX平台（包括linux）的轻量级流编辑器。<strong>sed</strong>主要是用来将数据进行选取、替换、删除、新增的命令。<br><strong>sed</strong> [选项] ‘[动作]’ 文件名</p>
 <blockquote>
 <p>选项：<br><code>-n</code>：一般sed命令会把所有数据输出到屏幕。如果加了该选项，则只会把经过sed命令处理过的行输出到屏幕；<br><code>-e</code>：允许多个条件同时执行，不同条件之间用<code>；</code>隔开；<br><code>-i</code>：用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出；</p>
 </blockquote>
@@ -753,12 +756,12 @@
 </blockquote>
 <ol>
 <li>行数据操作<br><strong>sed -n ‘2p’ file.txt</strong>：打印文件第二行，加-n选项只打印第二行，否则会打印全部文件。</li>
-<li>文件删除<br><strong>sed ‘2,3d’ file.txt</strong>：删除文件2-3行，只影响输出结果，不影响文件本身。 </li>
+<li>文件删除<br><strong>sed ‘2,3d’ file.txt</strong>：删除文件2-3行，只影响输出结果，不影响文件本身。</li>
 <li>文件追加<br><strong>sed ‘2a hello’ file.txt <strong>:在文件第2行后面加入</strong>hello</strong><br><strong>sed ‘2i  hello’ file.txt <strong>:在文件第2行前面加入</strong>hello</strong></li>
 <li>行替换<br><strong>sed ‘4c no person’ file.txt</strong>：将第4行数据替换为<strong>no persion</strong></li>
-<li>字符串替换<br><strong>sed ’3s/77/99/g‘ file.txt</strong>：将第3行的77替换为99<br><strong>sed -e ‘s/gao//g;s/chao//g’ file.txt</strong>     <h2 id="字符处理命令"><a href="#字符处理命令" class="headerlink" title="字符处理命令"></a>字符处理命令</h2></li>
+<li>字符串替换<br><strong>sed ’3s/77/99/g‘ file.txt</strong>：将第3行的77替换为99<br><strong>sed -e ‘s/gao//g;s/chao//g’ file.txt</strong></li>
 </ol>
-<h3 id="排序命令sort"><a href="#排序命令sort" class="headerlink" title="排序命令sort"></a>排序命令<strong>sort</strong></h3><p><code> sort [选项] 文件名</code></p>
+<h2 id="6、-字符处理命令"><a href="#6、-字符处理命令" class="headerlink" title="6、 字符处理命令"></a>6、 字符处理命令</h2><h3 id="6-1、排序命令sort"><a href="#6-1、排序命令sort" class="headerlink" title="6.1、排序命令sort"></a>6.1、排序命令<strong>sort</strong></h3><p><code> sort [选项] 文件名</code></p>
 <blockquote>
 <p>选项：</p>
 <ul>
@@ -767,12 +770,12 @@
 <li>-r：反向排序</li>
 <li>-t：指定分隔符，默认使用制表符</li>
 <li>-k n[,m]：按照指定的字段范围排序。从第n字段开始，m字段结束（默认到行尾）</li>
-<li>-u：去除重复行 </li>
+<li>-u：去除重复行</li>
 </ul>
 </blockquote>
 <p>示例：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">使用：为分隔符，以第三个字段排序，以数值型排序</span></span><br><span class="line">sort -n -t &quot;:&quot; -k 3,3 /etc/passwd</span><br></pre></td></tr></table></figure>
-<h3 id="统计命令wc"><a href="#统计命令wc" class="headerlink" title="统计命令wc"></a>统计命令<strong>wc</strong></h3><p><code>wc [选项] 文件名</code></p>
+<h3 id="6-2、统计命令wc"><a href="#6-2、统计命令wc" class="headerlink" title="6.2、统计命令wc"></a>6.2、统计命令<strong>wc</strong></h3><p><code>wc [选项] 文件名</code></p>
 <blockquote>
 <p>选项：</p>
 <ul>
@@ -782,7 +785,7 @@
 </ul>
 </blockquote>
 <hr>
-<h3 id="替换命令tr"><a href="#替换命令tr" class="headerlink" title="替换命令tr"></a>替换命令tr</h3><p><code>tr [OPTION]... SET1 [SET2]</code></p>
+<h3 id="6-3、替换命令tr"><a href="#6-3、替换命令tr" class="headerlink" title="6.3、替换命令tr"></a>6.3、替换命令tr</h3><p><code>tr [OPTION]... SET1 [SET2]</code></p>
 <p>选项：</p>
 <ul>
 <li><p>-s：替换重复的字符</p>
@@ -805,19 +808,25 @@
 <blockquote>
 <p>-c：complement，用SET2替换SET1中没有包含的字符</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">将空格替换为换行符</span></span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt </span><br><span class="line">the day is sunny the the</span><br><span class="line">the sunny is is</span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt | tr -s &#x27; &#x27; &#x27;\n&#x27;</span><br><span class="line">the</span><br><span class="line">day</span><br><span class="line">is</span><br><span class="line">sunny</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">sunny</span><br><span class="line">is</span><br><span class="line">is</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">将空格替换为换行符</span></span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt</span><br><span class="line">the day is sunny the the</span><br><span class="line">the sunny is is</span><br><span class="line">aston@work:~/shell/suanfa$ cat words.txt | tr -s &#x27; &#x27; &#x27;\n&#x27;</span><br><span class="line">the</span><br><span class="line">day</span><br><span class="line">is</span><br><span class="line">sunny</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">sunny</span><br><span class="line">is</span><br><span class="line">is</span><br></pre></td></tr></table></figure>
+
 
 ]]></content>
+      <categories>
+        <category>shell编程</category>
+      </categories>
       <tags>
         <tag>shell</tag>
       </tags>
   </entry>
   <entry>
-    <title>linux_shell1</title>
+    <title>linux shell编程 第二篇</title>
     <url>/posts/40073/</url>
-    <content><![CDATA[<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">判断文件是否存在</span></span><br><span class="line">test -e file.txt</span><br><span class="line">echo $?</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="7、条件判断"><a href="#7、条件判断" class="headerlink" title="7、条件判断"></a>7、条件判断</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">判断文件是否存在</span></span><br><span class="line">test -e file.txt</span><br><span class="line">echo $?</span><br></pre></td></tr></table></figure>
 
-<h3 id="按照文件类型进行判断"><a href="#按照文件类型进行判断" class="headerlink" title="按照文件类型进行判断"></a>按照文件类型进行判断</h3><table>
+<span id="more"></span>
+
+<h3 id="7-1、按照文件类型进行判断"><a href="#7-1、按照文件类型进行判断" class="headerlink" title="7.1、按照文件类型进行判断"></a>7.1、按照文件类型进行判断</h3><table>
 <thead>
 <tr>
 <th align="center">测试选项</th>
@@ -862,7 +871,7 @@
 </tr>
 </tbody></table>
 <p><code>[ -d /root ] &amp;&amp; echo &quot;yes&quot; || echo &quot;no&quot;</code></p>
-<h3 id="按照文件权限进行判断"><a href="#按照文件权限进行判断" class="headerlink" title="按照文件权限进行判断"></a>按照文件权限进行判断</h3><table>
+<h3 id="7-2、按照文件权限进行判断"><a href="#7-2、按照文件权限进行判断" class="headerlink" title="7.2、按照文件权限进行判断"></a>7.2、按照文件权限进行判断</h3><table>
 <thead>
 <tr>
 <th align="center">测试选项</th>
@@ -894,7 +903,7 @@
 <td align="center">判断文件是否存在，并且是否该文件拥有SBit权限（有SBit权限为真）</td>
 </tr>
 </tbody></table>
-<h3 id="两个文件之间比较"><a href="#两个文件之间比较" class="headerlink" title="两个文件之间比较"></a>两个文件之间比较</h3><table>
+<h3 id="7-3、两个文件之间比较"><a href="#7-3、两个文件之间比较" class="headerlink" title="7.3、两个文件之间比较"></a>7.3、两个文件之间比较</h3><table>
 <thead>
 <tr>
 <th align="center">测试选项</th>
@@ -914,7 +923,7 @@
 <td align="center">判断文件1是否和文件2的<strong>lnode</strong>号一致，理解为两个文件是否为同一个文件。用于判断硬链接</td>
 </tr>
 </tbody></table>
-<h3 id="两个整数比较"><a href="#两个整数比较" class="headerlink" title="两个整数比较"></a>两个整数比较</h3><table>
+<h3 id="7-4、两个整数比较"><a href="#7-4、两个整数比较" class="headerlink" title="7.4、两个整数比较"></a>7.4、两个整数比较</h3><table>
 <thead>
 <tr>
 <th align="left">测试选项</th>
@@ -946,7 +955,7 @@
 <td align="center">判断整数1是否小于等于整数2（小于等于为真）</td>
 </tr>
 </tbody></table>
-<h3 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断"></a>字符串判断</h3><table>
+<h3 id="7-5、字符串判断"><a href="#7-5、字符串判断" class="headerlink" title="7.5、字符串判断"></a>7.5、字符串判断</h3><table>
 <thead>
 <tr>
 <th align="left">测试选项</th>
@@ -970,7 +979,7 @@
 <td align="center">判断字符串1是否和字符串2不相等（不相等返回真）</td>
 </tr>
 </tbody></table>
-<h3 id="多重条件判断"><a href="#多重条件判断" class="headerlink" title="多重条件判断"></a>多重条件判断</h3><table>
+<h3 id="7-6、多重条件判断"><a href="#7-6、多重条件判断" class="headerlink" title="7.6、多重条件判断"></a>7.6、多重条件判断</h3><table>
 <thead>
 <tr>
 <th align="left">测试选项</th>
@@ -990,17 +999,17 @@
 <td align="center">逻辑非，使原始的判断取反</td>
 </tr>
 </tbody></table>
-<h2 id="流程控制-if语句"><a href="#流程控制-if语句" class="headerlink" title="流程控制-if语句"></a>流程控制-if语句</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ];then</span><br><span class="line">    程序</span><br><span class="line">fi</span><br><span class="line">或者</span><br><span class="line">if [ 条件判断式 ]</span><br><span class="line">then</span><br><span class="line">		程序</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="8、流程控制-if语句"><a href="#8、流程控制-if语句" class="headerlink" title="8、流程控制-if语句"></a>8、流程控制-if语句</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ];then</span><br><span class="line">    程序</span><br><span class="line">fi</span><br><span class="line">或者</span><br><span class="line">if [ 条件判断式 ]</span><br><span class="line">then</span><br><span class="line">		程序</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>if</strong>语句使用<strong>fi</strong>结尾；</li>
 <li>[ 条件判断式 ]就是使用<strong>test</strong>命令判断，所以中括号与判断式之间必须有空格 ；</li>
 <li><strong>then</strong>后面跟符合条件之后执行的程序，可以放在[]后面用<code>；</code>隔开，也可以换行写，不需要<code>；</code>。</li>
 </ul>
-<h2 id="流程控制-case语句"><a href="#流程控制-case语句" class="headerlink" title="流程控制-case语句"></a>流程控制-case语句</h2><p>多分支case条件语句</p>
+<h2 id="9、流程控制-case语句"><a href="#9、流程控制-case语句" class="headerlink" title="9、流程控制-case语句"></a>9、流程控制-case语句</h2><p>多分支case条件语句</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">case $变量 in</span><br><span class="line">	&quot;值1&quot;)</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span> something</span></span><br><span class="line">	;;</span><br><span class="line">	&quot;值2&quot;)</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span> something</span></span><br><span class="line">	;;</span><br><span class="line">	*)</span><br><span class="line"><span class="meta">	#</span><span class="bash">other to <span class="keyword">do</span> somethong</span></span><br><span class="line">	;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
-<h2 id="流程控制-for循环"><a href="#流程控制-for循环" class="headerlink" title="流程控制-for循环"></a>流程控制-for循环</h2><ul>
+<h2 id="10、流程控制-for循环"><a href="#10、流程控制-for循环" class="headerlink" title="10、流程控制-for循环"></a>10、流程控制-for循环</h2><ul>
 <li>语法1</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for 变量 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
@@ -1008,12 +1017,14 @@
 <li>语法2</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for (( 初始值；循环条件；变量变化 ))</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="流程控制-while循环和unite循环"><a href="#流程控制-while循环和unite循环" class="headerlink" title="流程控制-while循环和unite循环"></a>流程控制-while循环和unite循环</h2><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>while循环是不定循环，也称条件循环。只要条件判断式成立，循环就一直继续，直到条件判断式不成立，循环才停止。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">while [ 条件判断式 ]</span><br><span class="line">do </span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span> </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="11、流程控制-while循环和unite循环"><a href="#11、流程控制-while循环和unite循环" class="headerlink" title="11、流程控制-while循环和unite循环"></a>11、流程控制-while循环和unite循环</h2><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>while循环是不定循环，也称条件循环。只要条件判断式成立，循环就一直继续，直到条件判断式不成立，循环才停止。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">while [ 条件判断式 ]</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h3 id="unite循环"><a href="#unite循环" class="headerlink" title="unite循环"></a>unite循环</h3><p>unite循环和while循环相反，unite循环是只要条件判断式不成立则进行循环。一旦循环条件成立，则终止循环。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unite [ 条件判断式 ]</span><br><span class="line">do </span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span> </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unite [ 条件判断式 ]</span><br><span class="line">do</span><br><span class="line"><span class="meta">	#</span><span class="bash">to <span class="keyword">do</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>shell编程</category>
+      </categories>
       <tags>
         <tag>shell</tag>
       </tags>
