@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、JSON简介JSON全称(JavaScript Object Notation, JS 对象简谱)，是一种轻量级的数据交换格式。 本质就是具有特定格式的字符串。 JSON完全独立与编程语言，比XML数据传输的有效性要高很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSON简介及C语言开发">
+<meta property="og:url" content="http://example.com/posts/5299/index.html">
+<meta property="og:site_name" content="Cike">
+<meta property="og:description" content="1、JSON简介JSON全称(JavaScript Object Notation, JS 对象简谱)，是一种轻量级的数据交换格式。 本质就是具有特定格式的字符串。 JSON完全独立与编程语言，比XML数据传输的有效性要高很多">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/posts/5299/json.jpg">
+<meta property="article:published_time" content="2021-08-24T12:29:28.000Z">
+<meta property="article:modified_time" content="2021-08-24T12:39:16.233Z">
+<meta property="article:author" content="Ck">
+<meta property="article:tag" content="json">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/5299/json.jpg">
+
+<link rel="canonical" href="http://example.com/posts/5299/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JSON简介及C语言开发 | Cike</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cike</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">it s now or never</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5299/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.gif">
+      <meta itemprop="name" content="Ck">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cike">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JSON简介及C语言开发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-24 20:29:28 / 修改时间：20:39:16" itemprop="dateCreated datePublished" datetime="2021-08-24T20:29:28+08:00">2021-08-24</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、JSON简介"><a href="#1、JSON简介" class="headerlink" title="1、JSON简介"></a>1、JSON简介</h2><p><strong>JSON</strong>全称(<strong>JavaScript</strong> <strong>Object</strong> <strong>Notation</strong>, JS 对象简谱)，是一种轻量级的数据交换格式。</p>
+<p><strong>本质就是具有特定格式的字符串</strong>。</p>
+<p><strong>JSON</strong>完全独立与编程语言，比<strong>XML</strong>数据传输的有效性要高很多</p>
+<span id="more"></span>
+
+<p><img src="/posts/5299/json.jpg" alt="json"></p>
+<h2 id="2、JSON语法"><a href="#2、JSON语法" class="headerlink" title="2、JSON语法"></a>2、JSON语法</h2><p><strong>JSON</strong>分为两种大的类型：<strong>json数组</strong>和<strong>json对象</strong>，或者<strong>数组加对象</strong></p>
+<ul>
+<li><p><strong>json对象</strong></p>
+<p>JSON 对象需要在大括号<code>&#123;  &#125;</code>中书写。对象可以包含多个 <strong>key/value（键/值）</strong>对。</p>
+<p><strong>key 必须是字符串，不重复</strong>，</p>
+<p><strong>value</strong> 可以是合法的 JSON 数据类型（字符串, 数字, 对象, 数组, 布尔值或 null）</p>
+<p><strong>key</strong> 和 <strong>value</strong> 中使用冒号<code>:</code>分割，每个 <strong>key/value</strong> 对使用逗号<code>,</code>分割</p>
+<blockquote>
+<p><strong>注：</strong>最后一个键值对后面没有<code>，</code></p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;runoob&quot;</span>,</span><br><span class="line">   <span class="attr">&quot;alexa&quot;</span>:<span class="number">10000</span>,</span><br><span class="line">   <span class="attr">&quot;class&quot;</span>:&#123;<span class="attr">&quot;key1&quot;</span>:<span class="number">1</span>,<span class="attr">&quot;key2&quot;</span>:<span class="number">2</span>&#125;,</span><br><span class="line">   <span class="attr">&quot;BOOL_T&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">   <span class="attr">&quot;BOOL_F&quot;</span>:<span class="literal">false</span>，</span><br><span class="line">   <span class="string">&quot;site&quot;</span>:<span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p><strong>json数组</strong></p>
+<p>JSON 数组在中括号<code>[  ]</code>中书写。</p>
+<p>中括号[ <strong>整型</strong>，<strong>字符串</strong>，<strong>布尔类型</strong>，<strong>json数组</strong>，<strong>json对象</strong> ]</p>
+<p>JSON 中数组值必须是合法的 JSON 数据类型（字符串, 数字, 对象, 数组, 布尔值或 null）</p>
+<blockquote>
+<p><strong>注：</strong>数组中最后一个元素后没有<code>，</code></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例：</span></span><br><span class="line">[</span><br><span class="line">    <span class="number">123</span>,</span><br><span class="line">    <span class="number">123.3</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;Google&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Runoob&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Taobao&quot;</span>，</span><br><span class="line">    [<span class="literal">null</span>,<span class="string">&quot;json&quot;</span>]，</span><br><span class="line">    &#123;KEY:U&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3、C语言json开源解析库-cJSON"><a href="#3、C语言json开源解析库-cJSON" class="headerlink" title="3、C语言json开源解析库-cJSON"></a>3、C语言json开源解析库-cJSON</h2><h3 id="3-1、cJSON的使用"><a href="#3-1、cJSON的使用" class="headerlink" title="3.1、cJSON的使用"></a>3.1、cJSON的使用</h3><ul>
+<li>压缩包解压，直接使用里面的cJSON.c和cJSON.h即可</li>
+<li>链接时需要加上<code>-lm</code>表示链接math库</li>
+</ul>
+<h3 id="3-2、创建json对象"><a href="#3-2、创建json对象" class="headerlink" title="3.2、创建json对象"></a>3.2、创建json对象</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个json对象</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateObject</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">//向json对象中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToObject</span><span class="params">(cJSON *object,	<span class="comment">//json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,<span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                              cJSON *item)</span></span>;		<span class="comment">//value值（int, string，array，ogj）</span></span><br><span class="line"><span class="comment">//创建一个整型值</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNumber</span><span class="params">(<span class="keyword">double</span> num)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateNull</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateTrue</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateFalse</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateBool</span><span class="params">(<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//创建一个字符串</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateString</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span>;</span><br><span class="line"><span class="comment">//创建一个空数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateArray</span><span class="params">(<span class="keyword">void</span>)</span></span>;--空数组</span><br><span class="line"><span class="comment">//创建默认有count个整型值的json数组</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_CreateIntArray</span><span class="params">(<span class="keyword">int</span> *numbers,<span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="comment">//向json数组中添加数据成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cJSON_AddItemToArray</span><span class="params">(cJSON *<span class="built_in">array</span>, cJSON *item)</span></span>;</span><br><span class="line"><span class="comment">//释放json结构指针</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>   <span class="title">cJSON_Delete</span><span class="params">(cJSON *c)</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">将json结构转化为字符串</span></span><br><span class="line"><span class="comment">返回值需要用free释放</span></span><br><span class="line"><span class="comment">可以将字符串写入文件中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>  *<span class="title">cJSON_Print</span><span class="params">(cJSON *item)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3、删除json数据"><a href="#3-3、删除json数据" class="headerlink" title="3.3、删除json数据"></a>3.3、删除json数据</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3、解析json数据"><a href="#3-3、解析json数据" class="headerlink" title="3.3、解析json数据"></a>3.3、解析json数据</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将字符串解析为json结构</span></span><br><span class="line"><span class="comment">//返回值需要用cJSON_Delete释放</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_Parse</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *value)</span></span>;</span><br><span class="line"><span class="comment">//根据键值查找json节点</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetObjectItem</span><span class="params">(cJSON *object,	<span class="comment">//当前json对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">                           <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span><span class="comment">//key值</span></span></span></span><br><span class="line"><span class="params"><span class="function">                          )</span></span>;</span><br><span class="line"><span class="comment">//获取json数组中元素的个数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>	<span class="title">cJSON_GetArraySize</span><span class="params">(cJSON *<span class="built_in">array</span>)</span></span>;</span><br><span class="line"><span class="comment">//根据数组下标找到对应的数组元素</span></span><br><span class="line"><span class="function">cJSON *<span class="title">cJSON_GetArrayItem</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> item)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4、修改json数据"><a href="#3-4、修改json数据" class="headerlink" title="3.4、修改json数据"></a>3.4、修改json数据</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改数组中的元素，</span></span><br><span class="line"><span class="comment">//参数：array 数组</span></span><br><span class="line"><span class="comment">//which 要修改的数组元素的索引，0.1.2.3</span></span><br><span class="line"><span class="comment">//newitem 修改成新的元素</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInArray</span><span class="params">(cJSON *<span class="built_in">array</span>,<span class="keyword">int</span> which,cJSON *newitem)</span></span>;</span><br><span class="line"><span class="comment">//替换对象中“string”元组的值</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cJSON_ReplaceItemInObject</span><span class="params">(cJSON *object,<span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span>,cJSON *newitem)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、C语言json开源解析库-json-c"><a href="#4、C语言json开源解析库-json-c" class="headerlink" title="4、C语言json开源解析库-json-c"></a>4、C语言json开源解析库-json-c</h2><ul>
+<li>软件环境说明：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>操作系统</td>
+<td>ubuntu16.04 32位</td>
+</tr>
+<tr>
+<td>json-c版本</td>
+<td>JSON-C-0.13.1</td>
+</tr>
+</tbody></table>
+<ul>
+<li>参考说明：</li>
+</ul>
+<p><strong>json-c安装说明</strong> <a target="_blank" rel="noopener" href="http://www.linuxfromscratch.org/blfs/view/svn/general/json-c.html">^1</a></p>
+<h3 id="4-1、json-c的使用"><a href="#4-1、json-c的使用" class="headerlink" title="4.1、json-c的使用"></a>4.1、json-c的使用</h3><ul>
+<li>获取源码</li>
+</ul>
+<p>可到<a target="_blank" rel="noopener" href="http://www.linuxfromscratch.org/blfs/view/svn/general/json-c.html">json-c</a>网站中下载<a target="_blank" rel="noopener" href="https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz">JSON-C-0.13.1</a>源码</p>
+<ul>
+<li>安装</li>
+</ul>
+<p>将源码解压后，进入到<code>json-c-0.13.1</code>文件夹中，执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr --disable-static &amp;&amp; make</span><br></pre></td></tr></table></figure>
+
+<p>可能会出现告警如下。说明系统中缺少json-c需要的包。<strong>autoconf</strong>，<strong>automake</strong>，<strong>libtool</strong></p>
+<p>使用命令：<code>sudo apt-get install  autoconf automake libtool</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/home/work/test/jsonc/json-c-0.13.1/missing: 行 81: autoheader: 未找到命令</span><br><span class="line">WARNING: &#x27;autoheader&#x27; is missing on your system.</span><br><span class="line">You should only need it if you modified &#x27;acconfig.h&#x27; or</span><br><span class="line">&#x27;configure.ac&#x27; or m4 files included by &#x27;configure.ac&#x27;.</span><br><span class="line">The &#x27;autoheader&#x27; program is part of the GNU Autoconf package:</span><br><span class="line">&lt;http://www.gnu.org/software/autoconf/&gt;</span><br><span class="line">It also requires GNU m4 and Perl in order to run:</span><br><span class="line">&lt;http://www.gnu.org/software/m4/&gt;</span><br><span class="line">&lt;http://www.perl.org/&gt;</span><br><span class="line">Makefile:495: recipe for target &#x27;config.h.in&#x27; failed</span><br><span class="line">make: *** [config.h.in] Error 127</span><br></pre></td></tr></table></figure>
+<p>编译通过后，可以使用 <strong>make check</strong>命令检查</p>
+<p>最后使用<strong>root</strong>权限执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令解释</li>
+</ul>
+<blockquote>
+<p><em><code>--disable-static</code></em>: 阻止安装库的静态版本。</p>
+</blockquote>
+<ul>
+<li>安装内容</li>
+</ul>
+<ol>
+<li>安装的软件： 无</li>
+<li>安装的库文件：ibjson-c.so and libjson.so</li>
+<li>安装的头文件：/usr/include/json and /usr/include/json-c</li>
+</ol>
+<h3 id="4-2、自测代码"><a href="#4-2、自测代码" class="headerlink" title="4.2、自测代码"></a>4.2、自测代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;json.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">object</span>=</span>json_object_new_object();</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">json_object</span> *<span class="title">json_string</span>=</span>json_object_new_string (<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	<span class="keyword">int</span> a=json_object_object_add (object, <span class="string">&quot;test&quot;</span>, json_string);</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *object_string=json_object_to_json_string(object);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;object_string=%s\n&quot;</span>,object_string);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test json.c -ljson-c -I /usr/include/json-c/ -L /usr/lib/</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3、API说明"><a href="#4-3、API说明" class="headerlink" title="4.3、API说明"></a>4.3、API说明</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/659bb1b09f1b">JSON解析器json-c</a></p>
+<h3 id="4-4、移植"><a href="#4-4、移植" class="headerlink" title="4.4、移植"></a>4.4、移植</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+			<a href="/public/tags/json/" rel="tag"><i class="fa fa-tag"></i> json</a>
+          </div>
+		   <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var golden_ratio = 0.618033988749895;
+                    var s = 0.5;
+                    var v = 0.999;
+                    var h = golden_ratio + Math.random()*0.8 - 0.5;
+                    var h_i = parseInt(h * 6);
+                    var f = h * 6 - h_i;
+                    var p = v * (1 - s);
+                    var q = v * (1 - f * s);
+                    var t = v * (1 - (1 - f) * s);
+                    var r, g, b;
+                    switch (h_i) {
+                        case 0:
+                            r = v;
+                            g = t;
+                            b = p;
+                            break;
+                        case 1:
+                            r = q;
+                            g = v;
+                            b = p;
+                            break;
+                        case 2:
+                            r = p;
+                            g = v;
+                            b = t;
+                            break;
+                        case 3 :
+                            r = p;
+                            g = q;
+                            b = v;
+                            break;
+                        case 4:
+                            r = t;
+                            g = p;
+                            b = v;
+                            break;
+                        case 5:
+                            r = v;
+                            g = p;
+                            b = q;
+                            break;
+                        default:
+                            r = 1;
+                            g = 1;
+                            b = 1;
+                      }
+                    tags[j].style.background = "rgba("+parseInt(r*255)+","+parseInt(g*255)+","+parseInt(b*255)+","+0.5+")";
+                }
+            }
+            </script>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/794/" rel="prev" title="Cunit单元测试">
+      <i class="fa fa-chevron-left"></i> Cunit单元测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81JSON%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1、JSON简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81JSON%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2、JSON语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81C%E8%AF%AD%E8%A8%80json%E5%BC%80%E6%BA%90%E8%A7%A3%E6%9E%90%E5%BA%93-cJSON"><span class="nav-number">3.</span> <span class="nav-text">3、C语言json开源解析库-cJSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81cJSON%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、cJSON的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81%E5%88%9B%E5%BB%BAjson%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、创建json对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81%E5%88%A0%E9%99%A4json%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、删除json数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81%E8%A7%A3%E6%9E%90json%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">3.3、解析json数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81%E4%BF%AE%E6%94%B9json%E6%95%B0%E6%8D%AE"><span class="nav-number">3.5.</span> <span class="nav-text">3.4、修改json数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81C%E8%AF%AD%E8%A8%80json%E5%BC%80%E6%BA%90%E8%A7%A3%E6%9E%90%E5%BA%93-json-c"><span class="nav-number">4.</span> <span class="nav-text">4、C语言json开源解析库-json-c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E3%80%81json-c%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、json-c的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E3%80%81%E8%87%AA%E6%B5%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、自测代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3%E3%80%81API%E8%AF%B4%E6%98%8E"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、API说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4%E3%80%81%E7%A7%BB%E6%A4%8D"><span class="nav-number">4.4.</span> <span class="nav-text">4.4、移植</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ck"
+      src="/images/avatar1.gif">
+  <p class="site-author-name" itemprop="name">Ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/cike626" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;cike626" rel="noopener" target="_blank"><i class="fab fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+	
+	<!-- canvas粒子时钟 -->
+	<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ck</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
