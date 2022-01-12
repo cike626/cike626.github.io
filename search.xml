@@ -510,6 +510,7 @@
       </categories>
       <tags>
         <tag>git</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1027,6 +1028,43 @@
       </categories>
       <tags>
         <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tcpdump 命令移植</title>
+    <url>/posts/60861/</url>
+    <content><![CDATA[<h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p>tcpdump是一个用于抓取网络数据包的命令行工具，与带界面的Wireshark一样，基于<code>libpcap</code>库构建。</p>
+<p>tcpdump的设计目标是帮你分析包头（比如Tcp包头，udp包头），同时你可以根据包头，用它支持的表达式，过渡出你感兴趣的包，从而方便你自己处理包中数据。</p>
+<span id="more"></span>
+<h2 id="2、命令移植"><a href="#2、命令移植" class="headerlink" title="2、命令移植"></a>2、命令移植</h2><p>首先到官网<code>http://www.tcpdump.org/</code>下载<a href="http://www.tcpdump.org/release/tcpdump-4.9.3.tar.gz">tcpdump-4.9.3.tar.gz</a> 和<a href="http://www.tcpdump.org/release/libpcap-1.9.1.tar.gz">libpcap-1.9.1.tar.gz</a> 两个文件，将其放在同一个目录下然后解压。</p>
+<ul>
+<li>移植libpcap</li>
+</ul>
+<p>进入<code>libpcap-1.9.0</code>文件夹中，执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure -host=arm-linux --with-pcap=linux --prefix=/opt/libpcap CC=arm-linux-gcc</span><br></pre></td></tr></table></figure>
+
+<p>编译，安装 ：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make;make install</span><br></pre></td></tr></table></figure>
+
+<p><code>--prefix=</code><strong>xxxx</strong>，<strong>xxxx</strong>为安装路径，可自己指定。</p>
+<ul>
+<li>移植tcpdump</li>
+</ul>
+<p>进入<code>tcpdump-4.9.3</code>文件夹，执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure -host=arm-linux --prefix=/opt/tcpdump CC=arm-linux-gcc</span><br></pre></td></tr></table></figure>
+
+<p>编译，安装 ：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make;make install</span><br></pre></td></tr></table></figure>
+
+
+
+<p>移植成功后，会在**/opt/tcpdump<strong>文件夹下生成</strong>/sbin/tcpdump<strong>文件，将</strong>tcpdump**文件拷贝在ARM核心板中，执行<code>./tcpdump --help</code>命令，结果如下，说明命令移植成功。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/root@arm:~# ./tcpdump --help</span><br><span class="line">tcpdump version 4.9.3</span><br><span class="line">libpcap version 1.9.0-PRE-GIT (with TPACKET_V3)</span><br><span class="line">OpenSSL 1.0.1e 11 Feb 2013</span><br><span class="line">Usage: tcpdump [-aAbdDefhHIJKlLnNOpqStuUvxX#] [ -B size ] [ -c count ]</span><br><span class="line">                [ -C file_size ] [ -E algo:secret ] [ -F file ] [ -G seconds ]</span><br><span class="line">                [ -i interface ] [ -j tstamptype ] [ -M secret ] [ --number ]</span><br><span class="line">                [ -Q in|out|inout ]</span><br><span class="line">                [ -r file ] [ -s snaplen ] [ --time-stamp-precision precision ]</span><br><span class="line">                [ --immediate-mode ] [ -T type ] [ --version ] [ -V file ]</span><br><span class="line">                [ -w file ] [ -W filecount ] [ -y datalinktype ] [ -z postrotate-command]</span><br><span class="line">                [ -Z user ] [ expression ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、使用"><a href="#3、使用" class="headerlink" title="3、使用"></a>3、使用</h2><p><a href="https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html">说明</a></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
 </search>
