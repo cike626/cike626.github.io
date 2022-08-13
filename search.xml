@@ -1031,6 +1031,273 @@
       </tags>
   </entry>
   <entry>
+    <title>markdown</title>
+    <url>/posts/23825/</url>
+    <content><![CDATA[<p><img src="/posts/23825/markdown_0.png"></p>
+<span id="more"></span>
+
+<h2 id="一、markdown简介"><a href="#一、markdown简介" class="headerlink" title="一、markdown简介"></a>一、markdown简介</h2><p>Markdown是一种轻量级标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。 由于Markdown的轻量化、易读易写特性，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。</p>
+<h2 id="二、markdown语法"><a href="#二、markdown语法" class="headerlink" title="二、markdown语法"></a>二、markdown语法</h2><h3 id="1、目录结构"><a href="#1、目录结构" class="headerlink" title="1、目录结构"></a>1、目录结构</h3><p>Markdown可以自动生成目录结构，使用关键字：<code>[TOC]</code></p>
+<h3 id="2、标题"><a href="#2、标题" class="headerlink" title="2、标题"></a>2、标题</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown中使用<kbd>#</kbd>号表示标题，一个<code>#</code>为一级标题，<code>##</code>为二级标题。</p>
+<blockquote>
+<p>注：# 号后面加空格</p>
+</blockquote>
+<p>Markdown中最多支持5级标题。</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line">---</span><br><span class="line"><span class="section">##### 五级标题</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_2.png" alt="markdown_2"></p>
+<ul>
+<li>  <strong>快捷键方式</strong>：</li>
+</ul>
+<p><kbd>Ctrl</kbd>+数字</p>
+<p><kbd>Ctrl</kbd>+0 ：取消标题</p>
+<h3 id="3、文字加粗"><a href="#3、文字加粗" class="headerlink" title="3、文字加粗"></a>3、文字加粗</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>**</code>号表示文字粗体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**文字加粗**</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_3.png" alt="markdown_3"></p>
+</li>
+<li><p>  <strong>快捷键方式</strong>：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>B</kbd>；此方式在word软件中同样适用。</p>
+<h3 id="4、文字斜体"><a href="#4、文字斜体" class="headerlink" title="4、文字斜体"></a>4、文字斜体</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>*</code>号表示文字斜体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*文字斜体*</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_4.png" alt="markdown_4"></p>
+</li>
+<li><p>  <strong>快捷键方式</strong>：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>I</kbd>；此方式在word软件中同样适用。</p>
+<h3 id="5、删除线"><a href="#5、删除线" class="headerlink" title="5、删除线"></a>5、删除线</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>~~</code>号表示文字斜体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_4-1.png" alt="markdown_4-1"></p>
+</li>
+</ul>
+<h3 id="6、外部链接"><a href="#6、外部链接" class="headerlink" title="6、外部链接"></a>6、外部链接</h3><ul>
+<li>  语法：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">超链接名</span>](<span class="link">超链接地址 &quot;超链接title&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>超链接名：链接的名称</p>
+<p>超链接title：是链接的标题，当鼠标移到链接上时显示的内容。title可加可不加</p>
+<ul>
+<li>  语法示例：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">简书</span>](<span class="link">http://jianshu.com &quot;简书&quot;</span>)</span><br><span class="line">[<span class="string">百度</span>](<span class="link">http://baidu.com</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>渲染效果：</p>
+<p>  <img src="/posts/23825/markdown_5.png" alt="markdown_5"></p>
+</li>
+<li><p>  快捷键方式：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>K</kbd>；</p>
+<p><em>不同软件快捷方式可能不同</em></p>
+<h3 id="7、插入图片"><a href="#7、插入图片" class="headerlink" title="7、插入图片"></a>7、插入图片</h3><ul>
+<li>  <strong>语法</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">图片alt</span>](<span class="link">图片地址 &#x27;&#x27;图片title&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片alt：是显示在图片下面的文字，相当于对图片内容的解释。</p>
+<p>图片title：是图片的标题，当鼠标移到图片上时显示的内容，title可加可不加。</p>
+<p>图片地址可以是网络图片链接，也可以是本地图片地址。</p>
+<ul>
+<li>  <strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_6.png" alt="markdown_6"></p>
+<h3 id="8、代码块"><a href="#8、代码块" class="headerlink" title="8、代码块"></a>8、代码块</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>单行代码：代码之间分别用一个反引号<kbd>`</kbd>包起来；</p>
+<p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">//单行代码</span><br><span class="line"><span class="code">`create database hero`</span></span><br><span class="line"></span><br><span class="line">//代码块</span><br><span class="line"><span class="code">```shell</span></span><br><span class="line"><span class="code">    function fun()&#123;</span></span><br><span class="line"><span class="code">         echo &quot;这是一句非常牛逼的代码&quot;;</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">    fun();</span></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_7.png" alt="markdown_7"></p>
+<h3 id="9、分割线"><a href="#9、分割线" class="headerlink" title="9、分割线"></a>9、分割线</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>三个或者三个以上的 - 或者 * 都可以。</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="section"><span class="strong">****</span></span></span><br><span class="line"><span class="section">---</span></span><br><span class="line">--------</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_8.png" alt="markdown_8"></p>
+<h3 id="10、列表"><a href="#10、列表" class="headerlink" title="10、列表"></a>10、列表</h3><p><strong>markdown中列表分为无序列表和有序列表。</strong></p>
+<center>
+无序列表
+</center>
+
+<ul>
+<li><p><strong>语法</strong></p>
+<p>  无序列表用 - + * 任何一种都可以</p>
+</li>
+<li><p><strong>语法示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> 列表内容</span><br><span class="line"><span class="bullet">+</span> 列表内容</span><br><span class="line"><span class="bullet">*</span> 列表内容</span><br><span class="line"></span><br><span class="line">注意：- + <span class="emphasis">* 跟内容之间都要有一个空格</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-0.png" alt="markdown_9-0"></p>
+<center>
+有序列表
+</center>
+
+<ul>
+<li><p><strong>语法</strong></p>
+<p>  数字加点</p>
+</li>
+<li><p><strong>语法示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1.</span> 列表内容</span><br><span class="line"><span class="bullet">2.</span> 列表内容</span><br><span class="line"><span class="bullet">3.</span> 列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-1.png" alt="markdown_9-1"></p>
+<center>
+列表嵌套
+</center>
+
+<p><strong>上一级和下一级之间敲三个空格即可</strong></p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1.</span> 一级有序列表内容</span><br><span class="line"><span class="bullet">    1.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">    2.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">    3.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">2.</span> 一级有序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">3.</span> 一级有序列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-2.png" alt="markdown_9-2"></p>
+<h3 id="11、引用内容"><a href="#11、引用内容" class="headerlink" title="11、引用内容"></a>11、引用内容</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br><span class="line">&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_10.png" alt="markdown_10"></p>
+<h3 id="12、表格"><a href="#12、表格" class="headerlink" title="12、表格"></a>12、表格</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">| 姓名 | 技能 | 排行 |</span><br><span class="line">| ---- | :--: | ---: |</span><br><span class="line">| 刘备 |  哭  | 大哥 |</span><br><span class="line">| 关羽 |  打  | 二哥 |</span><br><span class="line">| 张飞 |  骂  | 三弟 |</span><br></pre></td></tr></table></figure>
+
+<p>第二行分割表头和内容。</p>
+<p><code>-</code>有一个就行，为了对齐，多加了几个</p>
+<p>文字默认居左</p>
+<p><code>-</code>两边加：表示文字居中</p>
+<p><code>-</code>右边加：表示文字居右</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="center">技能</th>
+<th align="right">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td align="center">哭</td>
+<td align="right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td align="center">打</td>
+<td align="right">二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td align="center">骂</td>
+<td align="right">三弟</td>
+</tr>
+</tbody></table>
+<h2 id="三、高级技巧"><a href="#三、高级技巧" class="headerlink" title="三、高级技巧"></a>三、高级技巧</h2><h3 id="支持HTML元素"><a href="#支持HTML元素" class="headerlink" title="支持HTML元素"></a>支持HTML元素</h3><ul>
+<li>标签定义键盘文本</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Ctrl<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>+</span><br><span class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span>a<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><kbd>Ctrl</kbd>+<kbd>a</kbd></p>
+<ul>
+<li>居中显示</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">    居中显示</span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+<center>
+    居中显示
+</center>
+- 下划线
+
+<p>下划线可以通过 HTML 的 <code>&lt;u&gt;&lt;/u&gt;</code> 标签来实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><u>带下划线文本</u></p>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><ol>
+<li><p><a href="https://ericp.cn/cmd">Markdown 公式指导手册</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/miki-peng/p/12502985.html">markdown语法大全</a></p>
+</li>
+<li><p><a href="https://maxiang.io/">欢迎使用马克飞象</a></p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>systemd  启动脚本时的问题</title>
     <url>/posts/12650/</url>
     <content><![CDATA[<p>使用systemd系统启动脚本服务，服务启动正常，但是脚本没有按照我们预想的方式运行，没有输出信息。</p>

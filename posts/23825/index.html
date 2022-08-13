@@ -22,20 +22,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1、简介tcpdump是一个用于抓取网络数据包的命令行工具，与带界面的Wireshark一样，基于libpcap库构建。 tcpdump的设计目标是帮你分析包头（比如Tcp包头，udp包头），同时你可以根据包头，用它支持的表达式，过渡出你感兴趣的包，从而方便你自己处理包中数据。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="tcpdump 命令移植">
-<meta property="og:url" content="http://example.com/posts/60861/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="markdown">
+<meta property="og:url" content="http://example.com/posts/23825/index.html">
 <meta property="og:site_name" content="Cike">
-<meta property="og:description" content="1、简介tcpdump是一个用于抓取网络数据包的命令行工具，与带界面的Wireshark一样，基于libpcap库构建。 tcpdump的设计目标是帮你分析包头（比如Tcp包头，udp包头），同时你可以根据包头，用它支持的表达式，过渡出你感兴趣的包，从而方便你自己处理包中数据。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-12T14:01:18.000Z">
-<meta property="article:modified_time" content="2022-01-12T14:07:02.546Z">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_0.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_2.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_3.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_4.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_4-1.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_5.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_6.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_7.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_8.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_9-0.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_9-1.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_9-2.png">
+<meta property="og:image" content="http://example.com/posts/23825/markdown_10.png">
+<meta property="article:published_time" content="2022-08-13T07:45:58.000Z">
+<meta property="article:modified_time" content="2022-08-13T08:02:51.260Z">
 <meta property="article:author" content="Ck">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/23825/markdown_0.png">
 
-<link rel="canonical" href="http://example.com/posts/60861/">
+<link rel="canonical" href="http://example.com/posts/23825/">
 
 
 <script id="page-configurations">
@@ -48,7 +60,7 @@
   };
 </script>
 
-  <title>tcpdump 命令移植 | Cike</title>
+  <title>markdown | Cike</title>
   
 
 
@@ -197,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/60861/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/23825/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.gif">
@@ -210,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          tcpdump 命令移植
+          markdown
         </h1>
 
         <div class="post-meta">
@@ -221,7 +233,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-12 22:01:18 / 修改时间：22:07:02" itemprop="dateCreated datePublished" datetime="2022-01-12T22:01:18+08:00">2022-01-12</time>
+              <time title="创建时间：2022-08-13 15:45:58 / 修改时间：16:02:51" itemprop="dateCreated datePublished" datetime="2022-08-13T15:45:58+08:00">2022-08-13</time>
             </span>
 
           
@@ -237,14 +249,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -256,35 +268,265 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p>tcpdump是一个用于抓取网络数据包的命令行工具，与带界面的Wireshark一样，基于<code>libpcap</code>库构建。</p>
-<p>tcpdump的设计目标是帮你分析包头（比如Tcp包头，udp包头），同时你可以根据包头，用它支持的表达式，过渡出你感兴趣的包，从而方便你自己处理包中数据。</p>
+        <p><img src="/posts/23825/markdown_0.png"></p>
 <span id="more"></span>
-<h2 id="2、命令移植"><a href="#2、命令移植" class="headerlink" title="2、命令移植"></a>2、命令移植</h2><p>首先到官网<code>http://www.tcpdump.org/</code>下载<a target="_blank" rel="noopener" href="http://www.tcpdump.org/release/tcpdump-4.9.3.tar.gz">tcpdump-4.9.3.tar.gz</a> 和<a target="_blank" rel="noopener" href="http://www.tcpdump.org/release/libpcap-1.9.1.tar.gz">libpcap-1.9.1.tar.gz</a> 两个文件，将其放在同一个目录下然后解压。</p>
-<ul>
-<li>移植libpcap</li>
+
+<h2 id="一、markdown简介"><a href="#一、markdown简介" class="headerlink" title="一、markdown简介"></a>一、markdown简介</h2><p>Markdown是一种轻量级标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。 由于Markdown的轻量化、易读易写特性，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。</p>
+<h2 id="二、markdown语法"><a href="#二、markdown语法" class="headerlink" title="二、markdown语法"></a>二、markdown语法</h2><h3 id="1、目录结构"><a href="#1、目录结构" class="headerlink" title="1、目录结构"></a>1、目录结构</h3><p>Markdown可以自动生成目录结构，使用关键字：<code>[TOC]</code></p>
+<h3 id="2、标题"><a href="#2、标题" class="headerlink" title="2、标题"></a>2、标题</h3><ul>
+<li>  <strong>语法</strong>：</li>
 </ul>
-<p>进入<code>libpcap-1.9.0</code>文件夹中，执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure -host=arm-linux --with-pcap=linux --prefix=/opt/libpcap CC=arm-linux-gcc</span><br></pre></td></tr></table></figure>
-
-<p>编译，安装 ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make;make install</span><br></pre></td></tr></table></figure>
-
-<p><code>--prefix=</code><strong>xxxx</strong>，<strong>xxxx</strong>为安装路径，可自己指定。</p>
+<p>Markdown中使用<kbd>#</kbd>号表示标题，一个<code>#</code>为一级标题，<code>##</code>为二级标题。</p>
+<blockquote>
+<p>注：# 号后面加空格</p>
+</blockquote>
+<p>Markdown中最多支持5级标题。</p>
 <ul>
-<li>移植tcpdump</li>
+<li>  <strong>语法示例</strong>：</li>
 </ul>
-<p>进入<code>tcpdump-4.9.3</code>文件夹，执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure -host=arm-linux --prefix=/opt/tcpdump CC=arm-linux-gcc</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line">---</span><br><span class="line"><span class="section">##### 五级标题</span></span><br></pre></td></tr></table></figure>
 
-<p>编译，安装 ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make;make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>  <strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_2.png" alt="markdown_2"></p>
+<ul>
+<li>  <strong>快捷键方式</strong>：</li>
+</ul>
+<p><kbd>Ctrl</kbd>+数字</p>
+<p><kbd>Ctrl</kbd>+0 ：取消标题</p>
+<h3 id="3、文字加粗"><a href="#3、文字加粗" class="headerlink" title="3、文字加粗"></a>3、文字加粗</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>**</code>号表示文字粗体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**文字加粗**</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_3.png" alt="markdown_3"></p>
+</li>
+<li><p>  <strong>快捷键方式</strong>：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>B</kbd>；此方式在word软件中同样适用。</p>
+<h3 id="4、文字斜体"><a href="#4、文字斜体" class="headerlink" title="4、文字斜体"></a>4、文字斜体</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>*</code>号表示文字斜体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="emphasis">*文字斜体*</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_4.png" alt="markdown_4"></p>
+</li>
+<li><p>  <strong>快捷键方式</strong>：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>I</kbd>；此方式在word软件中同样适用。</p>
+<h3 id="5、删除线"><a href="#5、删除线" class="headerlink" title="5、删除线"></a>5、删除线</h3><ul>
+<li>  <strong>语法</strong>：</li>
+</ul>
+<p>Markdown使用<code>~~</code>号表示文字斜体</p>
+<ul>
+<li>  <strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
 
-<p>移植成功后，会在**/opt/tcpdump<strong>文件夹下生成</strong>/sbin/tcpdump<strong>文件，将</strong>tcpdump**文件拷贝在ARM核心板中，执行<code>./tcpdump --help</code>命令，结果如下，说明命令移植成功。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/root@arm:~# ./tcpdump --help</span><br><span class="line">tcpdump version 4.9.3</span><br><span class="line">libpcap version 1.9.0-PRE-GIT (with TPACKET_V3)</span><br><span class="line">OpenSSL 1.0.1e 11 Feb 2013</span><br><span class="line">Usage: tcpdump [-aAbdDefhHIJKlLnNOpqStuUvxX#] [ -B size ] [ -c count ]</span><br><span class="line">                [ -C file_size ] [ -E algo:secret ] [ -F file ] [ -G seconds ]</span><br><span class="line">                [ -i interface ] [ -j tstamptype ] [ -M secret ] [ --number ]</span><br><span class="line">                [ -Q in|out|inout ]</span><br><span class="line">                [ -r file ] [ -s snaplen ] [ --time-stamp-precision precision ]</span><br><span class="line">                [ --immediate-mode ] [ -T type ] [ --version ] [ -V file ]</span><br><span class="line">                [ -w file ] [ -W filecount ] [ -y datalinktype ] [ -z postrotate-command]</span><br><span class="line">                [ -Z user ] [ expression ]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>渲染效果</strong>：</p>
+<p>  <img src="/posts/23825/markdown_4-1.png" alt="markdown_4-1"></p>
+</li>
+</ul>
+<h3 id="6、外部链接"><a href="#6、外部链接" class="headerlink" title="6、外部链接"></a>6、外部链接</h3><ul>
+<li>  语法：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">超链接名</span>](<span class="link">超链接地址 &quot;超链接title&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<h2 id="3、使用"><a href="#3、使用" class="headerlink" title="3、使用"></a>3、使用</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html">说明</a></p>
+<p>超链接名：链接的名称</p>
+<p>超链接title：是链接的标题，当鼠标移到链接上时显示的内容。title可加可不加</p>
+<ul>
+<li>  语法示例：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">简书</span>](<span class="link">http://jianshu.com &quot;简书&quot;</span>)</span><br><span class="line">[<span class="string">百度</span>](<span class="link">http://baidu.com</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>渲染效果：</p>
+<p>  <img src="/posts/23825/markdown_5.png" alt="markdown_5"></p>
+</li>
+<li><p>  快捷键方式：</p>
+</li>
+</ul>
+<p>选中要加粗的文字，然后按<kbd>Ctrl</kbd>+<kbd>K</kbd>；</p>
+<p><em>不同软件快捷方式可能不同</em></p>
+<h3 id="7、插入图片"><a href="#7、插入图片" class="headerlink" title="7、插入图片"></a>7、插入图片</h3><ul>
+<li>  <strong>语法</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片alt</span>](<span class="link">图片地址 &#x27;&#x27;图片title&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片alt：是显示在图片下面的文字，相当于对图片内容的解释。</p>
+<p>图片title：是图片的标题，当鼠标移到图片上时显示的内容，title可加可不加。</p>
+<p>图片地址可以是网络图片链接，也可以是本地图片地址。</p>
+<ul>
+<li>  <strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_6.png" alt="markdown_6"></p>
+<h3 id="8、代码块"><a href="#8、代码块" class="headerlink" title="8、代码块"></a>8、代码块</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>单行代码：代码之间分别用一个反引号<kbd>`</kbd>包起来；</p>
+<p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//单行代码</span><br><span class="line"><span class="code">`create database hero`</span></span><br><span class="line"></span><br><span class="line">//代码块</span><br><span class="line"><span class="code">```shell</span></span><br><span class="line"><span class="code">    function fun()&#123;</span></span><br><span class="line"><span class="code">         echo &quot;这是一句非常牛逼的代码&quot;;</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">    fun();</span></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_7.png" alt="markdown_7"></p>
+<h3 id="9、分割线"><a href="#9、分割线" class="headerlink" title="9、分割线"></a>9、分割线</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>三个或者三个以上的 - 或者 * 都可以。</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="section"><span class="strong">****</span></span></span><br><span class="line"><span class="section">---</span></span><br><span class="line">--------</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_8.png" alt="markdown_8"></p>
+<h3 id="10、列表"><a href="#10、列表" class="headerlink" title="10、列表"></a>10、列表</h3><p><strong>markdown中列表分为无序列表和有序列表。</strong></p>
+<center>
+无序列表
+</center>
+
+<ul>
+<li><p><strong>语法</strong></p>
+<p>  无序列表用 - + * 任何一种都可以</p>
+</li>
+<li><p><strong>语法示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> 列表内容</span><br><span class="line"><span class="bullet">+</span> 列表内容</span><br><span class="line"><span class="bullet">*</span> 列表内容</span><br><span class="line"></span><br><span class="line">注意：- + <span class="emphasis">* 跟内容之间都要有一个空格</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-0.png" alt="markdown_9-0"></p>
+<center>
+有序列表
+</center>
+
+<ul>
+<li><p><strong>语法</strong></p>
+<p>  数字加点</p>
+</li>
+<li><p><strong>语法示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 列表内容</span><br><span class="line"><span class="bullet">2.</span> 列表内容</span><br><span class="line"><span class="bullet">3.</span> 列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-1.png" alt="markdown_9-1"></p>
+<center>
+列表嵌套
+</center>
+
+<p><strong>上一级和下一级之间敲三个空格即可</strong></p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 一级有序列表内容</span><br><span class="line"><span class="bullet">    1.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">    2.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">    3.</span> 二级有序列表内容</span><br><span class="line"><span class="bullet">2.</span> 一级有序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">    -</span> 二级无序列表内容</span><br><span class="line"><span class="bullet">3.</span> 一级有序列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_9-2.png" alt="markdown_9-2"></p>
+<h3 id="11、引用内容"><a href="#11、引用内容" class="headerlink" title="11、引用内容"></a>11、引用内容</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;</p>
+<ul>
+<li><strong>语法示例</strong>：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br><span class="line">&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>渲染效果</strong>：</li>
+</ul>
+<p><img src="/posts/23825/markdown_10.png" alt="markdown_10"></p>
+<h3 id="12、表格"><a href="#12、表格" class="headerlink" title="12、表格"></a>12、表格</h3><ul>
+<li><strong>语法</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| 姓名 | 技能 | 排行 |</span><br><span class="line">| ---- | :--: | ---: |</span><br><span class="line">| 刘备 |  哭  | 大哥 |</span><br><span class="line">| 关羽 |  打  | 二哥 |</span><br><span class="line">| 张飞 |  骂  | 三弟 |</span><br></pre></td></tr></table></figure>
+
+<p>第二行分割表头和内容。</p>
+<p><code>-</code>有一个就行，为了对齐，多加了几个</p>
+<p>文字默认居左</p>
+<p><code>-</code>两边加：表示文字居中</p>
+<p><code>-</code>右边加：表示文字居右</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="center">技能</th>
+<th align="right">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td align="center">哭</td>
+<td align="right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td align="center">打</td>
+<td align="right">二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td align="center">骂</td>
+<td align="right">三弟</td>
+</tr>
+</tbody></table>
+<h2 id="三、高级技巧"><a href="#三、高级技巧" class="headerlink" title="三、高级技巧"></a>三、高级技巧</h2><h3 id="支持HTML元素"><a href="#支持HTML元素" class="headerlink" title="支持HTML元素"></a>支持HTML元素</h3><ul>
+<li>标签定义键盘文本</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Ctrl<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>+</span><br><span class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span>a<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><kbd>Ctrl</kbd>+<kbd>a</kbd></p>
+<ul>
+<li>居中显示</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">    居中显示</span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+<center>
+    居中显示
+</center>
+- 下划线
+
+<p>下划线可以通过 HTML 的 <code>&lt;u&gt;&lt;/u&gt;</code> 标签来实现：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><u>带下划线文本</u></p>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://ericp.cn/cmd">Markdown 公式指导手册</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/miki-peng/p/12502985.html">markdown语法大全</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://maxiang.io/">欢迎使用马克飞象</a></p>
+</li>
+</ol>
 
     </div>
 
@@ -295,7 +537,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-			<a href="/public/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+			<a href="/public/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
           </div>
 		   <script type="text/javascript">
             var tagsall=document.getElementsByClassName("post-tags")
@@ -359,13 +601,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/40073/" rel="prev" title="linux shell编程 第二篇">
-      <i class="fa fa-chevron-left"></i> linux shell编程 第二篇
+    <a href="/posts/12650/" rel="prev" title="systemd  启动脚本时的问题">
+      <i class="fa fa-chevron-left"></i> systemd  启动脚本时的问题
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/12650/" rel="next" title="systemd  启动脚本时的问题">
-      systemd  启动脚本时的问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -424,7 +663,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E4%BB%8B"><span class="nav-text">1、简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%91%BD%E4%BB%A4%E7%A7%BB%E6%A4%8D"><span class="nav-text">2、命令移植</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%BD%BF%E7%94%A8"><span class="nav-text">3、使用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81markdown%E7%AE%80%E4%BB%8B"><span class="nav-text">一、markdown简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81markdown%E8%AF%AD%E6%B3%95"><span class="nav-text">二、markdown语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">1、目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%A0%87%E9%A2%98"><span class="nav-text">2、标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%96%87%E5%AD%97%E5%8A%A0%E7%B2%97"><span class="nav-text">3、文字加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%96%87%E5%AD%97%E6%96%9C%E4%BD%93"><span class="nav-text">4、文字斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E5%88%A0%E9%99%A4%E7%BA%BF"><span class="nav-text">5、删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5"><span class="nav-text">6、外部链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-text">7、插入图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-text">8、代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E5%88%86%E5%89%B2%E7%BA%BF"><span class="nav-text">9、分割线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E5%88%97%E8%A1%A8"><span class="nav-text">10、列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E5%BC%95%E7%94%A8%E5%86%85%E5%AE%B9"><span class="nav-text">11、引用内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="nav-text">12、表格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="nav-text">三、高级技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81HTML%E5%85%83%E7%B4%A0"><span class="nav-text">支持HTML元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">四、参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
